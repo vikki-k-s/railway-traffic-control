@@ -1,0 +1,1480 @@
+$date
+	Wed Oct 28 13:29:06 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module railway_level_crossing_tb $end
+$var wire 1 ! train_signal_red $end
+$var wire 1 " train_signal_green $end
+$var wire 1 # train_present $end
+$var wire 1 $ train_approaching $end
+$var wire 1 % sensor_fault $end
+$var wire 1 & safety_violation_alarm $end
+$var wire 1 ' road_yellow $end
+$var wire 1 ( road_red $end
+$var wire 1 ) road_green $end
+$var wire 1 * ped_walk $end
+$var wire 1 + ped_dont_walk $end
+$var wire 1 , led_flasher_right $end
+$var wire 1 - led_flasher_left $end
+$var wire 2 . gate_state [1:0] $end
+$var wire 1 / gate_motor_up $end
+$var wire 1 0 gate_motor_down $end
+$var wire 7 1 gate_angle [6:0] $end
+$var wire 1 2 emergency_indicator $end
+$var wire 3 3 emergency_cause [2:0] $end
+$var wire 1 4 emergency_active $end
+$var wire 1 5 buzzer_audio $end
+$var wire 1 6 barrier_lock_cmd $end
+$var reg 1 7 clk $end
+$var reg 1 8 emergency_vehicle_req $end
+$var reg 1 9 manual_emergency_btn $end
+$var reg 1 : manual_force_open $end
+$var reg 1 ; obstacle_sensor $end
+$var reg 1 < rst_n $end
+$var reg 1 = sensor_entry_raw $end
+$var reg 1 > sensor_exit_raw $end
+$var reg 1 ? sensor_track_raw $end
+$var integer 32 @ fail_count [31:0] $end
+$var integer 32 A pass_count [31:0] $end
+$var integer 32 B test_case_count [31:0] $end
+$scope module dut $end
+$var wire 1 7 clk $end
+$var wire 1 8 emergency_vehicle_req $end
+$var wire 1 9 manual_emergency_btn $end
+$var wire 1 : manual_force_open $end
+$var wire 1 ; obstacle_sensor $end
+$var wire 1 < rst_n $end
+$var wire 1 = sensor_entry_raw $end
+$var wire 1 > sensor_exit_raw $end
+$var wire 1 ? sensor_track_raw $end
+$var wire 1 ! train_signal_red $end
+$var wire 1 " train_signal_green $end
+$var wire 1 # train_present $end
+$var wire 1 C train_direction $end
+$var wire 1 D train_cleared $end
+$var wire 1 $ train_approaching $end
+$var wire 1 E sensor_track_clean $end
+$var wire 1 % sensor_fault $end
+$var wire 1 F sensor_exit_clean $end
+$var wire 1 G sensor_entry_clean $end
+$var wire 1 & safety_violation_alarm $end
+$var wire 1 ' road_yellow $end
+$var wire 1 ( road_red $end
+$var wire 1 ) road_green $end
+$var wire 1 H req_open $end
+$var wire 1 I req_close $end
+$var wire 1 * ped_walk $end
+$var wire 1 + ped_dont_walk $end
+$var wire 1 J obstacle_detected $end
+$var wire 1 , led_flasher_right $end
+$var wire 1 - led_flasher_left $end
+$var wire 1 K interlock_open_en $end
+$var wire 1 L interlock_close_en $end
+$var wire 1 M gate_warning $end
+$var wire 2 N gate_state [1:0] $end
+$var wire 1 / gate_motor_up $end
+$var wire 1 0 gate_motor_down $end
+$var wire 1 O gate_is_open $end
+$var wire 1 P gate_is_closed $end
+$var wire 7 Q gate_angle [6:0] $end
+$var wire 1 2 emergency_indicator $end
+$var wire 3 R emergency_cause [2:0] $end
+$var wire 1 4 emergency_active $end
+$var wire 1 5 buzzer_audio $end
+$var wire 1 6 barrier_lock_cmd $end
+$var parameter 32 S BLINK_DIV $end
+$var parameter 32 T DEBOUNCE_CYCLES $end
+$var parameter 32 U MOTOR_TRANSIT_CYCLES $end
+$var parameter 32 V POST_CLEAR_DELAY $end
+$var parameter 32 W WARN_DELAY_CYCLES $end
+$scope module u_emergency_warning $end
+$var wire 1 7 clk $end
+$var wire 1 8 emergency_vehicle_req $end
+$var wire 1 9 manual_emergency_btn $end
+$var wire 1 J obstacle_detected $end
+$var wire 1 ; obstacle_sensor $end
+$var wire 1 < rst_n $end
+$var wire 1 # train_present $end
+$var wire 1 $ train_approaching $end
+$var wire 1 % sensor_fault $end
+$var wire 1 M gate_warning $end
+$var wire 2 X gate_state [1:0] $end
+$var parameter 32 Y TONE_DIV_FAST $end
+$var parameter 32 Z TONE_DIV_SLOW $end
+$var reg 4 [ active_alarms [3:0] $end
+$var reg 1 5 buzzer_audio $end
+$var reg 8 \ counter_timer [7:0] $end
+$var reg 1 4 emergency_active $end
+$var reg 3 ] emergency_cause [2:0] $end
+$var reg 1 2 emergency_indicator $end
+$var reg 1 ^ flasher_phase $end
+$var reg 1 - led_flasher_left $end
+$var reg 1 , led_flasher_right $end
+$var reg 1 _ tone_fast $end
+$var reg 1 ` tone_slow $end
+$upscope $end
+$scope module u_gate_controller $end
+$var wire 1 7 clk $end
+$var wire 1 4 emergency_active $end
+$var wire 1 P gate_is_closed $end
+$var wire 1 O gate_is_open $end
+$var wire 1 < rst_n $end
+$var wire 1 # train_present $end
+$var wire 1 D train_cleared $end
+$var wire 1 $ train_approaching $end
+$var wire 1 K interlock_open_en $end
+$var wire 1 L interlock_close_en $end
+$var parameter 32 a MOTOR_TRANSIT_CYCLES $end
+$var parameter 32 b POST_CLEAR_DELAY $end
+$var parameter 2 c ST_CLOSED $end
+$var parameter 2 d ST_CLOSING $end
+$var parameter 2 e ST_OPEN $end
+$var parameter 2 f ST_OPENING $end
+$var parameter 32 g WARN_DELAY_CYCLES $end
+$var reg 8 h clear_timer [7:0] $end
+$var reg 2 i current_state [1:0] $end
+$var reg 7 j gate_angle [6:0] $end
+$var reg 1 0 gate_motor_down $end
+$var reg 1 / gate_motor_up $end
+$var reg 2 k gate_state [1:0] $end
+$var reg 1 M gate_warning $end
+$var reg 2 l next_state [1:0] $end
+$var reg 1 I req_close $end
+$var reg 1 H req_open $end
+$var reg 8 m timer_count [7:0] $end
+$scope function calc_angle_status $end
+$var reg 7 n angle [6:0] $end
+$upscope $end
+$scope task update_barrier_position $end
+$var reg 7 o angle [6:0] $end
+$var reg 1 p dir_down $end
+$var reg 1 q dir_up $end
+$upscope $end
+$upscope $end
+$scope module u_safety_interlock $end
+$var wire 1 6 barrier_lock_cmd $end
+$var wire 1 r danger_condition $end
+$var wire 1 4 emergency_active $end
+$var wire 1 L interlock_close_en $end
+$var wire 1 K interlock_open_en $end
+$var wire 1 : manual_force_open $end
+$var wire 1 s normal_safe_permit $end
+$var wire 1 t not_emergency $end
+$var wire 1 u not_train_approaching $end
+$var wire 1 v not_train_present $end
+$var wire 1 I req_close $end
+$var wire 1 H req_open $end
+$var wire 1 & safety_violation_alarm $end
+$var wire 1 # train_present $end
+$var wire 1 $ train_approaching $end
+$upscope $end
+$scope module u_traffic_controller $end
+$var wire 1 7 clk $end
+$var wire 1 4 emergency_active $end
+$var wire 1 P gate_is_closed $end
+$var wire 1 O gate_is_open $end
+$var wire 2 w gate_state [1:0] $end
+$var wire 1 M gate_warning $end
+$var wire 1 J obstacle_detected $end
+$var wire 1 + ped_dont_walk $end
+$var wire 1 * ped_walk $end
+$var wire 1 ) road_green $end
+$var wire 1 ( road_red $end
+$var wire 1 ' road_yellow $end
+$var wire 1 < rst_n $end
+$var wire 1 " train_signal_green $end
+$var wire 1 ! train_signal_red $end
+$var wire 1 # train_present $end
+$var wire 1 $ train_approaching $end
+$var wire 1 x blink_pulse $end
+$var parameter 32 y BLINK_DIV $end
+$var reg 2 z clk_counter [1:0] $end
+$upscope $end
+$scope module u_train_detection $end
+$var wire 1 7 clk $end
+$var wire 1 { entry_rising $end
+$var wire 1 | exit_rising $end
+$var wire 1 < rst_n $end
+$var wire 1 G sensor_entry_clean $end
+$var wire 1 = sensor_entry_raw $end
+$var wire 1 F sensor_exit_clean $end
+$var wire 1 > sensor_exit_raw $end
+$var wire 1 E sensor_track_clean $end
+$var wire 1 ? sensor_track_raw $end
+$var parameter 32 } DEBOUNCE_CYCLES $end
+$var parameter 3 ~ FAULT_DETECTED $end
+$var parameter 3 !" TRACK_IDLE $end
+$var parameter 3 "" TRAIN_AT_CROSSING $end
+$var parameter 3 #" TRAIN_CLEARING $end
+$var parameter 3 $" TRAIN_INBOUND $end
+$var parameter 3 %" TRAIN_OUTBOUND $end
+$var reg 3 &" current_state [2:0] $end
+$var reg 1 '" entry_filtered $end
+$var reg 1 (" entry_prev $end
+$var reg 3 )" entry_shift [2:0] $end
+$var reg 1 *" exit_filtered $end
+$var reg 1 +" exit_prev $end
+$var reg 3 ," exit_shift [2:0] $end
+$var reg 3 -" next_state [2:0] $end
+$var reg 1 % sensor_fault $end
+$var reg 1 ." track_filtered $end
+$var reg 3 /" track_shift [2:0] $end
+$var reg 1 $ train_approaching $end
+$var reg 1 D train_cleared $end
+$var reg 1 C train_direction $end
+$var reg 1 # train_present $end
+$scope function check_sensor_validity $end
+$var reg 1 0" entry_s $end
+$var reg 1 1" exit_s $end
+$var reg 3 2" state [2:0] $end
+$var reg 1 3" track_s $end
+$upscope $end
+$upscope $end
+$upscope $end
+$scope task apply_system_reset $end
+$upscope $end
+$scope task simulate_normal_train_passage $end
+$var integer 32 4" crossing_duration [31:0] $end
+$var integer 32 5" entry_duration [31:0] $end
+$var integer 32 6" exit_duration [31:0] $end
+$upscope $end
+$scope task test_manual_emergency_override $end
+$upscope $end
+$scope task test_multitasking_concurrency $end
+$upscope $end
+$scope task test_safety_interlock_violation $end
+$upscope $end
+$scope task test_track_obstacle_emergency $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b11 %"
+b1 $"
+b100 #"
+b10 ""
+b0 !"
+b101 ~
+b11 }
+b10 y
+b100 g
+b11 f
+b0 e
+b1 d
+b10 c
+b11 b
+b101 a
+b1000 Z
+b100 Y
+b100 W
+b11 V
+b101 U
+b11 T
+b10 S
+$end
+#0
+$dumpvars
+bx 6"
+bx 5"
+bx 4"
+03"
+b0 2"
+01"
+00"
+b0 /"
+0."
+b0 -"
+b0 ,"
+0+"
+0*"
+b0 )"
+0("
+0'"
+b0 &"
+0|
+0{
+b0 z
+0x
+b0 w
+1v
+1u
+1t
+1s
+0r
+xq
+xp
+bx o
+bx n
+b0 m
+b0 l
+b0 k
+b1011010 j
+b0 i
+b0 h
+0`
+0_
+0^
+b0 ]
+b0 \
+b0 [
+b0 X
+b0 R
+b1011010 Q
+0P
+1O
+b0 N
+0M
+0L
+0K
+0J
+0I
+0H
+0G
+0F
+0E
+0D
+0C
+b0 B
+b0 A
+b0 @
+0?
+0>
+0=
+0<
+0;
+0:
+09
+08
+07
+06
+05
+04
+b0 3
+02
+b1011010 1
+00
+0/
+b0 .
+0-
+0,
+0+
+1*
+1)
+0(
+0'
+0&
+0%
+0$
+0#
+0"
+1!
+$end
+#10000
+17
+#20000
+07
+#30000
+17
+#40000
+07
+#50000
+1K
+b1 \
+b1 z
+1H
+17
+1<
+#60000
+07
+#70000
+1x
+b10 z
+b10 \
+17
+#80000
+07
+1=
+b11001000 6"
+b11001000 4"
+b100000100 5"
+b1 B
+b1 A
+#90000
+b11 \
+b11 z
+b1 )"
+17
+#100000
+07
+#110000
+0x
+b11 )"
+b0 z
+b100 \
+17
+#120000
+07
+#130000
+b101 \
+b1 z
+b111 )"
+17
+#140000
+07
+#150000
+b1 -"
+10"
+1{
+1x
+1G
+1'"
+b10 z
+b110 \
+17
+#160000
+07
+#170000
+1+
+0*
+0)
+0K
+1L
+16
+0s
+0{
+1r
+0u
+b1 2"
+b111 \
+b11 z
+1$
+b1 &"
+1("
+17
+#180000
+07
+#190000
+1'
+0x
+b1 m
+1M
+b0 z
+b1000 \
+1,
+17
+#200000
+07
+#210000
+1^
+1_
+b1001 \
+b1 z
+b10 m
+17
+#220000
+07
+#230000
+1(
+1x
+b11 m
+b10 z
+b1010 \
+0,
+1-
+17
+#240000
+07
+#250000
+b1 l
+b1011 \
+b11 z
+b100 m
+17
+#260000
+07
+#270000
+0O
+0x
+0H
+1I
+b0 m
+b1 .
+b1 N
+b1 X
+b1 k
+b1 w
+b1 i
+b0 z
+b1100 \
+17
+#280000
+07
+#290000
+b1101 \
+b1 z
+10
+b1001000 1
+b1001000 Q
+b1001000 j
+b1001000 o
+1p
+0q
+17
+#300000
+07
+#310000
+1x
+b10 z
+b1110 \
+b110110 1
+b110110 Q
+b110110 j
+b110110 o
+17
+#320000
+07
+#330000
+b1111 \
+b11 z
+b100100 1
+b100100 Q
+b100100 j
+b100100 o
+17
+#340000
+07
+1?
+#350000
+0x
+b1 /"
+b0 z
+b10000 \
+b10010 1
+b10010 Q
+b10010 j
+b10010 o
+17
+#360000
+07
+#370000
+0^
+0_
+b10001 \
+b1 z
+b11 /"
+b10 l
+b0 1
+b0 Q
+b0 j
+b0 o
+17
+#380000
+07
+0=
+#390000
+0!
+1"
+1x
+1(
+1P
+b111 /"
+b110 )"
+b10 z
+b10010 \
+1,
+0-
+b10 .
+b10 N
+b10 X
+b10 k
+b10 w
+b10 i
+17
+#400000
+07
+#410000
+0'
+b10 -"
+13"
+b10011 \
+b11 z
+1E
+1."
+b100 )"
+00
+0M
+17
+#420000
+07
+#430000
+b10 2"
+0v
+1u
+0x
+b0 )"
+b10 &"
+1#
+0$
+b0 z
+b10100 \
+17
+#440000
+07
+#450000
+00"
+b10101 \
+b1 z
+0G
+0'"
+17
+#460000
+07
+#470000
+1x
+0("
+b10 z
+b10110 \
+17
+#480000
+07
+#490000
+b10111 \
+b11 z
+17
+#500000
+07
+#510000
+0x
+b0 z
+b11000 \
+17
+#520000
+07
+#530000
+1^
+1_
+b11001 \
+b1 z
+17
+#540000
+07
+#550000
+1x
+b10 z
+b11010 \
+0,
+1-
+17
+#560000
+07
+#570000
+b11011 \
+b11 z
+17
+#580000
+07
+1>
+#590000
+0x
+b1 ,"
+b0 z
+b11100 \
+17
+#600000
+07
+#610000
+b11101 \
+b1 z
+b11 ,"
+17
+#620000
+07
+0?
+#630000
+1x
+b111 ,"
+b110 /"
+b10 z
+b11110 \
+17
+#640000
+07
+#650000
+11"
+1|
+b11111 \
+b11 z
+1F
+1*"
+b100 /"
+17
+#660000
+07
+#670000
+0|
+0x
+1+"
+b0 /"
+b0 z
+b100000 \
+17
+#680000
+07
+#690000
+b11 -"
+03"
+0^
+0_
+b100001 \
+b1 z
+0E
+0."
+17
+#700000
+07
+#710000
+b11 2"
+1x
+b11 &"
+b10 z
+b100010 \
+1,
+0-
+17
+#720000
+07
+#730000
+b100011 \
+b11 z
+17
+#740000
+07
+#750000
+0x
+b0 z
+b100100 \
+17
+#760000
+07
+#770000
+b100101 \
+b1 z
+17
+#780000
+07
+#790000
+1x
+b10 z
+b100110 \
+17
+#800000
+07
+#810000
+b100111 \
+b11 z
+17
+#820000
+07
+0>
+#830000
+0x
+b110 ,"
+b0 z
+b101000 \
+17
+#840000
+07
+#850000
+1^
+1_
+b101001 \
+b1 z
+b100 ,"
+17
+#860000
+07
+#870000
+1x
+b0 ,"
+b10 z
+b101010 \
+0,
+1-
+17
+#880000
+07
+#890000
+b100 -"
+01"
+b101011 \
+b11 z
+0F
+0*"
+17
+#900000
+07
+#910000
+06
+1s
+b0 -"
+b100 2"
+0r
+1v
+0x
+0+"
+b100 &"
+1D
+0#
+b0 z
+b101100 \
+17
+#920000
+07
+#930000
+b0 2"
+b101101 \
+b1 z
+0D
+b0 &"
+b1 h
+17
+#940000
+07
+#950000
+1x
+b10 h
+b10 z
+b101110 \
+17
+#960000
+07
+#970000
+b11 l
+b101111 \
+b11 z
+b11 h
+17
+#980000
+07
+#990000
+1!
+0"
+0L
+1K
+0P
+0x
+0I
+1H
+b11 .
+b11 N
+b11 X
+b11 k
+b11 w
+b11 i
+b0 z
+b110000 \
+17
+#1000000
+07
+#1010000
+0^
+0_
+b110001 \
+b1 z
+1/
+b0 h
+b10010 1
+b10010 Q
+b10010 j
+b10010 o
+0p
+1q
+17
+#1020000
+07
+#1030000
+1x
+b10 z
+b110010 \
+1,
+0-
+b100100 1
+b100100 Q
+b100100 j
+b100100 o
+17
+#1040000
+07
+#1050000
+b110011 \
+b11 z
+b110110 1
+b110110 Q
+b110110 j
+b110110 o
+17
+#1060000
+07
+#1070000
+0x
+b0 z
+b110100 \
+b1001000 1
+b1001000 Q
+b1001000 j
+b1001000 o
+17
+#1080000
+07
+#1090000
+b110101 \
+b1 z
+b0 l
+b1011010 1
+b1011010 Q
+b1011010 j
+b1011010 o
+17
+#1100000
+07
+#1110000
+0+
+1*
+1)
+0(
+1x
+1O
+b10 z
+b110110 \
+b0 .
+b0 N
+b0 X
+b0 k
+b0 w
+b0 i
+17
+#1120000
+07
+1?
+#1130000
+0,
+b110111 \
+b11 z
+b1 /"
+0/
+17
+#1140000
+07
+#1150000
+0x
+b11 /"
+b0 z
+b111000 \
+17
+#1160000
+07
+#1170000
+1^
+1_
+b111001 \
+b1 z
+b111 /"
+17
+#1180000
+07
+1:
+#1190000
+b101 -"
+13"
+1x
+1E
+1."
+b10 z
+b111010 \
+17
+#1200000
+07
+#1210000
+1+
+0*
+0)
+0K
+1L
+16
+1&
+0s
+1r
+0v
+b101 2"
+b111011 \
+b11 z
+1#
+1%
+b101 &"
+17
+#1220000
+0&
+07
+0?
+0:
+b10 B
+b10 A
+#1230000
+1(
+0x
+0t
+b1 m
+1M
+b110 /"
+b0 z
+12
+b100 3
+b100 R
+b100 ]
+14
+b1000 [
+b111100 \
+1-
+17
+#1240000
+07
+#1250000
+15
+b111101 \
+b1 z
+b100 /"
+b10 m
+17
+#1260000
+07
+#1270000
+1x
+b11 m
+b0 /"
+b10 z
+b111110 \
+17
+#1280000
+07
+#1290000
+b0 -"
+03"
+b1 l
+b111111 \
+b11 z
+0E
+0."
+b100 m
+17
+#1300000
+07
+1J
+1;
+#1310000
+0O
+b0 2"
+1v
+0x
+0H
+1I
+b0 m
+b1 .
+b1 N
+b1 X
+b1 k
+b1 w
+b1 i
+b0 &"
+0%
+0#
+b0 z
+b10 3
+b10 R
+b10 ]
+b1010 [
+b1000000 \
+17
+#1320000
+07
+#1330000
+0^
+0_
+b1000001 \
+b10 [
+b1 z
+10
+b1001000 1
+b1001000 Q
+b1001000 j
+b1001000 o
+1p
+0q
+17
+#1340000
+07
+#1350000
+1x
+b10 z
+b1000010 \
+1,
+0-
+05
+b110110 1
+b110110 Q
+b110110 j
+b110110 o
+17
+#1360000
+07
+#1370000
+b1000011 \
+b11 z
+b100100 1
+b100100 Q
+b100100 j
+b100100 o
+17
+#1380000
+07
+#1390000
+0x
+b0 z
+b1000100 \
+b10010 1
+b10010 Q
+b10010 j
+b10010 o
+17
+#1400000
+07
+b11 B
+b11 A
+#1410000
+b1000101 \
+b1 z
+b10 l
+b0 1
+b0 Q
+b0 j
+b0 o
+17
+#1420000
+07
+#1430000
+1x
+1P
+b10 z
+b1000110 \
+b10 .
+b10 N
+b10 X
+b10 k
+b10 w
+b10 i
+17
+#1440000
+07
+#1450000
+b1000111 \
+b11 z
+00
+0M
+17
+#1460000
+07
+0J
+0;
+#1470000
+0!
+1s
+06
+1"
+0x
+1t
+0r
+b0 z
+02
+b0 3
+b0 R
+b0 ]
+04
+b0 [
+b1001000 \
+17
+#1480000
+07
+#1490000
+1^
+1_
+b1001001 \
+b1 z
+17
+#1500000
+07
+#1510000
+1x
+b10 z
+b1001010 \
+0,
+1-
+17
+#1520000
+07
+#1530000
+b1001011 \
+b11 z
+17
+#1540000
+07
+#1550000
+0x
+b0 z
+b1001100 \
+17
+#1560000
+07
+19
+#1570000
+1!
+0s
+16
+0"
+0t
+1r
+b1001101 \
+12
+b1 3
+b1 R
+b1 ]
+14
+b1 [
+b1 z
+17
+#1580000
+07
+#1590000
+1x
+b10 z
+b1001110 \
+15
+17
+#1600000
+07
+#1610000
+b1001111 \
+b11 z
+17
+#1620000
+07
+#1630000
+0x
+b0 z
+b1010000 \
+17
+#1640000
+07
+09
+b100 B
+b100 A
+#1650000
+0!
+1s
+06
+1"
+1t
+0r
+0^
+0_
+b1010001 \
+02
+b0 3
+b0 R
+b0 ]
+04
+b0 [
+b1 z
+17
+#1660000
+07
+#1670000
+1x
+b10 z
+b1010010 \
+1,
+0-
+05
+17
+#1680000
+07
+#1690000
+b1010011 \
+b11 z
+17
+#1700000
+07
+#1710000
+0x
+b0 z
+b1010100 \
+17
+#1720000
+07
+#1730000
+b1010101 \
+b1 z
+17
+#1740000
+07
+#1750000
+1x
+b1 )"
+b10 z
+b1010110 \
+17
+1=
+#1760000
+07
+#1770000
+1!
+0s
+16
+0"
+0t
+1r
+b1010111 \
+12
+b11 3
+b11 R
+b11 ]
+14
+b100 [
+b11 z
+b11 )"
+17
+18
+#1780000
+07
+#1790000
+0x
+b111 )"
+b0 z
+b1011000 \
+17
+#1800000
+07
+#1810000
+b1 -"
+10"
+1{
+1^
+1_
+b1011001 \
+b1 z
+1G
+1'"
+17
+#1820000
+07
+#1830000
+0{
+b1 2"
+0u
+1x
+1("
+b110 )"
+b1 &"
+1$
+b10 z
+b1011010 \
+0,
+1-
+15
+17
+0=
+#1840000
+07
+#1850000
+b1011011 \
+b11 z
+b100 )"
+17
+#1860000
+07
+08
+#1870000
+0!
+1"
+0x
+1t
+b0 )"
+b0 z
+02
+b0 3
+b0 R
+b0 ]
+04
+b0 [
+b1011100 \
+17
+#1880000
+07
+#1890000
+00"
+05
+b1011101 \
+b1 z
+0G
+0'"
+17
+#1900000
+07
+#1910000
+1x
+0("
+b10 z
+b1011110 \
+17
+#1920000
+07
+#1930000
+b1011111 \
+b11 z
+17
+#1940000
+07
+#1950000
+0x
+b0 z
+b1100000 \
+17
+#1960000
+07
+b101 B
+b101 A
+#1970000
+0^
+0_
+b1100001 \
+b1 z
+17
+#1980000
+07
+#1990000
+1x
+b10 z
+b1100010 \
+1,
+0-
+17
+#2000000
+07
+#2010000
+b1100011 \
+b11 z
+17

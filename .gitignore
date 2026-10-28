@@ -1,0 +1,17 @@
+# Compiled binaries & simulation intermediates
+*.out
+*.o
+*.obj
+*.exe
+sim/*.out
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor & IDE settings
+.vscode/
+.idea/
+*.swp
+*~

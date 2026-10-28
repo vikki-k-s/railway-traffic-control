@@ -1,0 +1,36 @@
+# Yosys Synthesis Script for Railway Level Crossing Controller
+# GM University - PBL Course Code: UE25EC2302 (Unit 6: Logic Synthesis)
+
+read_verilog src/train_detection.v
+read_verilog src/gate_safety_interlock.v
+read_verilog src/gate_controller.v
+read_verilog src/traffic_light_controller.v
+read_verilog src/emergency_warning_module.v
+read_verilog src/railway_level_crossing_top.v
+
+# Elaborate design hierarchy
+hierarchy -check -top railway_level_crossing_top
+
+# High-level synthesis optimization
+proc
+opt
+fsm
+opt
+memory
+opt
+
+# Technology mapping to generic gate library
+techmap
+opt
+
+# Logic gate mapping
+abc -g AND,NAND,OR,NOR,XOR,XNOR,MUX
+
+# Clean up unused wires
+clean
+
+# Print cell count and area statistics
+stat
+
+# Output synthesized gate-level Verilog netlist
+write_verilog -noattr synth/railway_level_crossing_synth_netlist.v

@@ -1,0 +1,1678 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+
+-- Executing script file `synth/synth.ys' --
+
+1. Executing Verilog-2005 frontend: src/train_detection.v
+Parsing Verilog input from `src/train_detection.v' to AST representation.
+Generating RTLIL representation for module `\train_detection'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: src/gate_safety_interlock.v
+Parsing Verilog input from `src/gate_safety_interlock.v' to AST representation.
+Generating RTLIL representation for module `\gate_safety_interlock'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: src/gate_controller.v
+Parsing Verilog input from `src/gate_controller.v' to AST representation.
+Generating RTLIL representation for module `\gate_controller'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: src/traffic_light_controller.v
+Parsing Verilog input from `src/traffic_light_controller.v' to AST representation.
+Generating RTLIL representation for module `\traffic_light_controller'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: src/emergency_warning_module.v
+Parsing Verilog input from `src/emergency_warning_module.v' to AST representation.
+Generating RTLIL representation for module `\emergency_warning_module'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: src/railway_level_crossing_top.v
+Parsing Verilog input from `src/railway_level_crossing_top.v' to AST representation.
+Generating RTLIL representation for module `\railway_level_crossing_top'.
+Successfully finished Verilog frontend.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \railway_level_crossing_top
+Used module:     \emergency_warning_module
+Used module:     \traffic_light_controller
+Used module:     \gate_controller
+Used module:     \gate_safety_interlock
+Used module:     \train_detection
+Parameter \TONE_DIV_SLOW = 8
+Parameter \TONE_DIV_FAST = 4
+
+7.2. Executing AST frontend in derive mode using pre-parsed AST for module `\emergency_warning_module'.
+Parameter \TONE_DIV_SLOW = 8
+Parameter \TONE_DIV_FAST = 4
+Generating RTLIL representation for module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Parameter \BLINK_DIV = 4
+
+7.3. Executing AST frontend in derive mode using pre-parsed AST for module `\traffic_light_controller'.
+Parameter \BLINK_DIV = 4
+Generating RTLIL representation for module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Parameter \WARN_DELAY_CYCLES = 5
+Parameter \MOTOR_TRANSIT_CYCLES = 5
+Parameter \POST_CLEAR_DELAY = 3
+
+7.4. Executing AST frontend in derive mode using pre-parsed AST for module `\gate_controller'.
+Parameter \WARN_DELAY_CYCLES = 5
+Parameter \MOTOR_TRANSIT_CYCLES = 5
+Parameter \POST_CLEAR_DELAY = 3
+Generating RTLIL representation for module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Parameter \DEBOUNCE_CYCLES = 3
+
+7.5. Executing AST frontend in derive mode using pre-parsed AST for module `\train_detection'.
+Parameter \DEBOUNCE_CYCLES = 3
+Generating RTLIL representation for module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+
+7.6. Analyzing design hierarchy..
+Top module:  \railway_level_crossing_top
+Used module:     $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module
+Used module:     $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100
+Used module:     $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller
+Used module:     \gate_safety_interlock
+Used module:     $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011
+
+7.7. Analyzing design hierarchy..
+Top module:  \railway_level_crossing_top
+Used module:     $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module
+Used module:     $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100
+Used module:     $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller
+Used module:     \gate_safety_interlock
+Used module:     $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011
+Removing unused module `\emergency_warning_module'.
+Removing unused module `\traffic_light_controller'.
+Removing unused module `\gate_controller'.
+Removing unused module `\train_detection'.
+Removed 4 unused modules.
+
+8. Executing PROC pass (convert processes to netlists).
+
+8.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+8.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 3 switch rules as full_case in process $proc$src/train_detection.v:197$345 in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Marked 10 switch rules as full_case in process $proc$src/train_detection.v:143$313 in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Marked 1 switch rules as full_case in process $proc$src/train_detection.v:132$311 in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Marked 4 switch rules as full_case in process $proc$src/train_detection.v:87$296 in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Removed 1 dead cases from process $proc$src/gate_controller.v:208$281 in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Marked 6 switch rules as full_case in process $proc$src/gate_controller.v:208$281 in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Removed 1 dead cases from process $proc$src/gate_controller.v:111$236 in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Marked 17 switch rules as full_case in process $proc$src/gate_controller.v:111$236 in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Marked 1 switch rules as full_case in process $proc$src/traffic_light_controller.v:53$199 in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Marked 4 switch rules as full_case in process $proc$src/emergency_warning_module.v:127$186 in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Marked 1 switch rules as full_case in process $proc$src/emergency_warning_module.v:102$181 in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Marked 5 switch rules as full_case in process $proc$src/emergency_warning_module.v:64$179 in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Removed a total of 2 dead cases.
+
+8.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 22 redundant assignments.
+Promoted 9 assignments to connections.
+
+8.4. Executing PROC_INIT pass (extract init attributes).
+
+8.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+Found async reset \rst_n in `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:132$311'.
+Found async reset \rst_n in `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+Found async reset \rst_n in `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+Found async reset \rst_n in `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.$proc$src/traffic_light_controller.v:53$199'.
+Found async reset \rst_n in `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:127$186'.
+Found async reset \rst_n in `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:102$181'.
+Found async reset \rst_n in `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:64$179'.
+
+8.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~50 debug messages>
+
+8.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+     1/5: $0\train_cleared[0:0]
+     2/5: $0\train_present[0:0]
+     3/5: $0\train_approaching[0:0]
+     4/5: $0\sensor_fault[0:0]
+     5/5: $0\train_direction[0:0]
+Creating decoders for process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+     1/10: $9\next_state[2:0]
+     2/10: $8\next_state[2:0]
+     3/10: $7\next_state[2:0]
+     4/10: $6\next_state[2:0]
+     5/10: $5\next_state[2:0]
+     6/10: $4\next_state[2:0]
+     7/10: $3\next_state[2:0]
+     8/10: $2\next_state[2:0]
+     9/10: $1\next_state[2:0]
+    10/10: $1\check_sensor_validity$func$src/train_detection.v:147$295.$result[0:0]$325
+Creating decoders for process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:132$311'.
+     1/1: $0\current_state[2:0]
+Creating decoders for process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+     1/8: $0\exit_prev[0:0]
+     2/8: $0\entry_prev[0:0]
+     3/8: $0\exit_shift[2:0]
+     4/8: $0\track_shift[2:0]
+     5/8: $0\entry_shift[2:0]
+     6/8: $0\exit_filtered[0:0]
+     7/8: $0\track_filtered[0:0]
+     8/8: $0\entry_filtered[0:0]
+Creating decoders for process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:208$281'.
+     1/6: $6\next_state[1:0]
+     2/6: $5\next_state[1:0]
+     3/6: $4\next_state[1:0]
+     4/6: $3\next_state[1:0]
+     5/6: $2\next_state[1:0]
+     6/6: $1\next_state[1:0]
+Creating decoders for process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+     1/24: $7\update_barrier_position$func$src/gate_controller.v:191$229.angle[6:0]$279
+     2/24: $6\update_barrier_position$func$src/gate_controller.v:191$229.angle[6:0]$277
+     3/24: $5\update_barrier_position$func$src/gate_controller.v:191$229.angle[6:0]$273
+     4/24: $4\update_barrier_position$func$src/gate_controller.v:191$229.angle[6:0]$271
+     5/24: $3\update_barrier_position$func$src/gate_controller.v:191$229.angle[6:0]$268
+     6/24: $7\update_barrier_position$func$src/gate_controller.v:157$228.angle[6:0]$259
+     7/24: $6\update_barrier_position$func$src/gate_controller.v:157$228.angle[6:0]$257
+     8/24: $5\update_barrier_position$func$src/gate_controller.v:157$228.angle[6:0]$253
+     9/24: $4\update_barrier_position$func$src/gate_controller.v:157$228.angle[6:0]$251
+    10/24: $3\update_barrier_position$func$src/gate_controller.v:157$228.angle[6:0]$248
+    11/24: $0\gate_warning[0:0]
+    12/24: $2\update_barrier_position$func$src/gate_controller.v:191$229.angle[6:0]$243
+    13/24: $2\update_barrier_position$func$src/gate_controller.v:157$228.angle[6:0]$242
+    14/24: $1\update_barrier_position$func$src/gate_controller.v:191$229.angle[6:0]$241
+    15/24: $1\update_barrier_position$func$src/gate_controller.v:157$228.angle[6:0]$240
+    16/24: $0\gate_state[1:0]
+    17/24: $0\current_state[1:0]
+    18/24: $0\clear_timer[7:0]
+    19/24: $0\timer_count[7:0]
+    20/24: $0\gate_angle[6:0]
+    21/24: $0\gate_motor_up[0:0]
+    22/24: $0\gate_motor_down[0:0]
+    23/24: $0\req_close[0:0]
+    24/24: $0\req_open[0:0]
+Creating decoders for process `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.$proc$src/traffic_light_controller.v:53$199'.
+     1/1: $0\clk_counter[3:0]
+Creating decoders for process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:127$186'.
+     1/3: $0\led_flasher_right[0:0]
+     2/3: $0\led_flasher_left[0:0]
+     3/3: $0\buzzer_audio[0:0]
+Creating decoders for process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:102$181'.
+     1/4: $0\flasher_phase[0:0]
+     2/4: $0\counter_timer[7:0]
+     3/4: $0\tone_fast[0:0]
+     4/4: $0\tone_slow[0:0]
+Creating decoders for process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:64$179'.
+     1/4: $0\emergency_indicator[0:0]
+     2/4: $0\emergency_cause[2:0]
+     3/4: $0\emergency_active[0:0]
+     4/4: $0\active_alarms[3:0]
+
+8.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\next_state' from process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+No latch inferred for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\check_sensor_validity$func$src/train_detection.v:147$295.$result' from process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+No latch inferred for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\check_sensor_validity$func$src/train_detection.v:147$295.entry_s' from process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+No latch inferred for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\check_sensor_validity$func$src/train_detection.v:147$295.track_s' from process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+No latch inferred for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\check_sensor_validity$func$src/train_detection.v:147$295.exit_s' from process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+No latch inferred for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\check_sensor_validity$func$src/train_detection.v:147$295.state' from process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+No latch inferred for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\next_state' from process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:208$281'.
+
+8.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\train_approaching' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+  created $adff cell `$procdff$802' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\train_present' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+  created $adff cell `$procdff$807' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\train_cleared' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+  created $adff cell `$procdff$812' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\train_direction' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+  created $adff cell `$procdff$817' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\sensor_fault' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+  created $adff cell `$procdff$822' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\current_state' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:132$311'.
+  created $adff cell `$procdff$827' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\entry_shift' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+  created $adff cell `$procdff$832' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\track_shift' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+  created $adff cell `$procdff$837' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\exit_shift' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+  created $adff cell `$procdff$842' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\entry_filtered' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+  created $adff cell `$procdff$847' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\track_filtered' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+  created $adff cell `$procdff$852' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\exit_filtered' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+  created $adff cell `$procdff$857' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\entry_prev' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+  created $adff cell `$procdff$862' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.\exit_prev' using process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+  created $adff cell `$procdff$867' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\current_state' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$872' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\req_open' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$877' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\req_close' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$882' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\gate_motor_down' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$887' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\gate_motor_up' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$892' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\gate_state' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$897' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\gate_angle' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$902' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\gate_warning' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$907' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\timer_count' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$912' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\clear_timer' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$917' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\update_barrier_position$func$src/gate_controller.v:157$228.angle' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$922' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.\update_barrier_position$func$src/gate_controller.v:191$229.angle' using process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+  created $adff cell `$procdff$927' with positive edge clock and positive level reset.
+Creating register for signal `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.\clk_counter' using process `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.$proc$src/traffic_light_controller.v:53$199'.
+  created $adff cell `$procdff$932' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\buzzer_audio' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:127$186'.
+  created $adff cell `$procdff$937' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\led_flasher_left' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:127$186'.
+  created $adff cell `$procdff$942' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\led_flasher_right' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:127$186'.
+  created $adff cell `$procdff$947' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\counter_timer' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:102$181'.
+  created $adff cell `$procdff$952' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\flasher_phase' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:102$181'.
+  created $adff cell `$procdff$957' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\tone_slow' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:102$181'.
+  created $adff cell `$procdff$962' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\tone_fast' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:102$181'.
+  created $adff cell `$procdff$967' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\emergency_active' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:64$179'.
+  created $adff cell `$procdff$972' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\emergency_cause' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:64$179'.
+  created $adff cell `$procdff$977' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\emergency_indicator' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:64$179'.
+  created $adff cell `$procdff$982' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.\active_alarms' using process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:64$179'.
+  created $adff cell `$procdff$987' with positive edge clock and positive level reset.
+
+8.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+8.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 3 empty switches in `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+Removing empty process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:197$345'.
+Found and cleaned up 10 empty switches in `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+Removing empty process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:143$313'.
+Removing empty process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:132$311'.
+Found and cleaned up 6 empty switches in `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+Removing empty process `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.$proc$src/train_detection.v:87$296'.
+Found and cleaned up 6 empty switches in `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:208$281'.
+Removing empty process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:208$281'.
+Found and cleaned up 16 empty switches in `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+Removing empty process `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.$proc$src/gate_controller.v:111$236'.
+Removing empty process `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.$proc$src/traffic_light_controller.v:53$199'.
+Found and cleaned up 3 empty switches in `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:127$186'.
+Removing empty process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:127$186'.
+Found and cleaned up 2 empty switches in `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:102$181'.
+Removing empty process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:102$181'.
+Found and cleaned up 4 empty switches in `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:64$179'.
+Removing empty process `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.$proc$src/emergency_warning_module.v:64$179'.
+Cleaned up 50 empty switches.
+
+8.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module railway_level_crossing_top.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+<suppressed ~37 debug messages>
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+<suppressed ~53 debug messages>
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+<suppressed ~2 debug messages>
+Optimizing module gate_safety_interlock.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+<suppressed ~24 debug messages>
+
+9. Executing OPT pass (performing simple optimizations).
+
+9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module railway_level_crossing_top.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module gate_safety_interlock.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+
+9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\railway_level_crossing_top'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+<suppressed ~108 debug messages>
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+<suppressed ~213 debug messages>
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+<suppressed ~39 debug messages>
+Removed a total of 123 cells.
+
+9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \railway_level_crossing_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$465.
+    dead port 2/2 on $mux $procmux$462.
+    dead port 1/2 on $mux $procmux$451.
+    dead port 2/2 on $mux $procmux$448.
+    dead port 1/2 on $mux $procmux$446.
+    dead port 1/2 on $mux $procmux$434.
+    dead port 2/2 on $mux $procmux$431.
+    dead port 1/2 on $mux $procmux$421.
+    dead port 2/2 on $mux $procmux$418.
+    dead port 1/2 on $mux $procmux$409.
+    dead port 2/2 on $mux $procmux$406.
+    dead port 1/2 on $mux $procmux$404.
+    dead port 1/2 on $mux $procmux$394.
+    dead port 2/2 on $mux $procmux$391.
+    dead port 1/2 on $mux $procmux$383.
+    dead port 2/2 on $mux $procmux$380.
+    dead port 1/2 on $mux $procmux$475.
+    dead port 1/2 on $mux $procmux$481.
+    dead port 2/2 on $mux $procmux$481.
+Running muxtree optimizer on module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$636.
+    dead port 2/2 on $mux $procmux$636.
+    dead port 1/2 on $mux $procmux$634.
+    dead port 2/2 on $mux $procmux$634.
+    dead port 1/2 on $mux $procmux$632.
+    dead port 2/2 on $mux $procmux$632.
+    dead port 1/2 on $mux $procmux$626.
+    dead port 2/2 on $mux $procmux$626.
+    dead port 1/2 on $mux $procmux$624.
+    dead port 2/2 on $mux $procmux$624.
+    dead port 1/2 on $mux $procmux$622.
+    dead port 2/2 on $mux $procmux$622.
+    dead port 1/2 on $mux $procmux$620.
+    dead port 2/2 on $mux $procmux$620.
+    dead port 1/2 on $mux $procmux$613.
+    dead port 2/2 on $mux $procmux$613.
+    dead port 1/2 on $mux $procmux$611.
+    dead port 2/2 on $mux $procmux$611.
+    dead port 1/2 on $mux $procmux$609.
+    dead port 2/2 on $mux $procmux$609.
+    dead port 1/2 on $mux $procmux$591.
+    dead port 2/2 on $mux $procmux$591.
+    dead port 1/2 on $mux $procmux$584.
+    dead port 2/2 on $mux $procmux$584.
+    dead port 1/2 on $mux $procmux$582.
+    dead port 2/2 on $mux $procmux$582.
+    dead port 1/2 on $mux $procmux$579.
+    dead port 2/2 on $mux $procmux$579.
+    dead port 1/2 on $mux $procmux$577.
+    dead port 2/2 on $mux $procmux$577.
+    dead port 1/2 on $mux $procmux$565.
+    dead port 2/2 on $mux $procmux$565.
+    dead port 1/2 on $mux $procmux$560.
+    dead port 2/2 on $mux $procmux$560.
+    dead port 1/2 on $mux $procmux$558.
+    dead port 2/2 on $mux $procmux$558.
+    dead port 1/2 on $mux $procmux$553.
+    dead port 2/2 on $mux $procmux$553.
+    dead port 1/2 on $mux $procmux$549.
+    dead port 2/2 on $mux $procmux$549.
+    dead port 1/2 on $mux $procmux$547.
+    dead port 2/2 on $mux $procmux$547.
+    dead port 1/2 on $mux $procmux$542.
+    dead port 2/2 on $mux $procmux$542.
+    dead port 1/2 on $mux $procmux$540.
+    dead port 2/2 on $mux $procmux$540.
+    dead port 2/2 on $mux $procmux$530.
+    dead port 2/2 on $mux $procmux$522.
+    dead port 2/2 on $mux $procmux$515.
+    dead port 2/2 on $mux $procmux$509.
+    dead port 2/2 on $mux $procmux$504.
+    dead port 1/2 on $mux $procmux$502.
+    dead port 1/5 on $pmux $procmux$658.
+    dead port 2/5 on $pmux $procmux$658.
+    dead port 3/5 on $pmux $procmux$658.
+    dead port 4/5 on $pmux $procmux$658.
+    dead port 5/5 on $pmux $procmux$658.
+    dead port 1/5 on $pmux $procmux$653.
+    dead port 2/5 on $pmux $procmux$653.
+    dead port 3/5 on $pmux $procmux$653.
+    dead port 4/5 on $pmux $procmux$653.
+    dead port 5/5 on $pmux $procmux$653.
+    dead port 1/2 on $mux $procmux$641.
+    dead port 2/2 on $mux $procmux$641.
+    dead port 1/2 on $mux $procmux$643.
+    dead port 2/2 on $mux $procmux$643.
+Running muxtree optimizer on module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \gate_safety_interlock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 85 multiplexer ports.
+<suppressed ~26 debug messages>
+
+9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \railway_level_crossing_top.
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+    New ctrl vector for $pmux cell $procmux$352: $auto$opt_reduce.cc:137:opt_pmux$989
+    New input vector for $reduce_or cell $auto$opt_reduce.cc:131:opt_pmux$988: { $procmux$354_CMP $procmux$363_CMP }
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+    New ctrl vector for $pmux cell $procmux$689: { $procmux$706_CMP $auto$opt_reduce.cc:137:opt_pmux$991 $procmux$701_CMP }
+    New ctrl vector for $pmux cell $procmux$645: { $procmux$745_CMP $procmux$706_CMP $auto$opt_reduce.cc:137:opt_pmux$993 }
+    New ctrl vector for $pmux cell $procmux$700: { $procmux$706_CMP $auto$opt_reduce.cc:137:opt_pmux$995 $procmux$701_CMP }
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+  Optimizing cells in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+  Optimizing cells in module \gate_safety_interlock.
+  Optimizing cells in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Performed a total of 5 changes.
+
+9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\railway_level_crossing_top'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+<suppressed ~15 debug messages>
+Removed a total of 7 cells.
+
+9.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$817 ($adff) from module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011 (D = $procmux$372_Y, Q = \train_direction).
+Adding EN signal on $procdff$822 ($adff) from module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011 (D = $procmux$362_Y, Q = \sensor_fault).
+Adding EN signal on $procdff$857 ($adff) from module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011 (D = $procmux$486_Y, Q = \exit_filtered).
+Adding EN signal on $procdff$852 ($adff) from module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011 (D = $procmux$491_Y, Q = \track_filtered).
+Adding EN signal on $procdff$847 ($adff) from module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011 (D = $procmux$496_Y, Q = \entry_filtered).
+Adding EN signal on $procdff$887 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller (D = $procmux$700_Y, Q = \gate_motor_down).
+Adding EN signal on $procdff$872 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller (D = $procmux$532_Y, Q = \current_state).
+Adding EN signal on $procdff$912 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller (D = $procmux$673_Y, Q = \timer_count).
+Adding EN signal on $procdff$892 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller (D = $procmux$689_Y, Q = \gate_motor_up).
+Adding EN signal on $procdff$877 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller (D = $procmux$737_Y, Q = \req_open).
+Adding EN signal on $procdff$882 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller (D = $procmux$718_Y, Q = \req_close).
+Adding EN signal on $procdff$902 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller (D = $procmux$683_Y, Q = \gate_angle).
+Adding EN signal on $procdff$917 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller (D = $procmux$663_Y, Q = \clear_timer).
+Setting constant 1-bit at position 0 on $procdff$927 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Setting constant 1-bit at position 1 on $procdff$927 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Setting constant 1-bit at position 2 on $procdff$927 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Setting constant 1-bit at position 3 on $procdff$927 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Setting constant 1-bit at position 4 on $procdff$927 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Setting constant 1-bit at position 5 on $procdff$927 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Setting constant 1-bit at position 6 on $procdff$927 ($adff) from module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Adding EN signal on $procdff$962 ($adff) from module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module (D = \counter_timer [7], Q = \tone_slow).
+Adding EN signal on $procdff$967 ($adff) from module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module (D = \counter_timer [3], Q = \tone_fast).
+
+9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \railway_level_crossing_top..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Removed 22 unused cells and 450 unused wires.
+<suppressed ~32 debug messages>
+
+9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+<suppressed ~7 debug messages>
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+<suppressed ~2 debug messages>
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+9.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \gate_safety_interlock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \railway_level_crossing_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~24 debug messages>
+
+9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+  Optimizing cells in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+  Optimizing cells in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+  Optimizing cells in module \gate_safety_interlock.
+  Optimizing cells in module \railway_level_crossing_top.
+Performed a total of 0 changes.
+
+9.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+<suppressed ~24 debug messages>
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 8 cells.
+
+9.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+Removed 0 unused cells and 8 unused wires.
+<suppressed ~1 debug messages>
+
+9.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+9.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+9.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \gate_safety_interlock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \railway_level_crossing_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~24 debug messages>
+
+9.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+  Optimizing cells in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+  Optimizing cells in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+  Optimizing cells in module \gate_safety_interlock.
+  Optimizing cells in module \railway_level_crossing_top.
+Performed a total of 0 changes.
+
+9.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 0 cells.
+
+9.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+
+9.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+9.23. Finished OPT passes. (There is nothing left to do.)
+
+10. Executing FSM pass (extract and optimize FSM).
+
+10.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.emergency_cause as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+Found FSM state register $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.current_state.
+
+10.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+Extracting FSM `\current_state' from module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+  found $adff cell for state register: $procdff$827
+  root of input selection tree: \next_state
+  found reset state: 3'000 (from async reset)
+  found ctrl input: $logic_and$src/train_detection.v:77$324_Y
+  found ctrl input: $procmux$381_CMP
+  found ctrl input: $procmux$392_CMP
+  found ctrl input: $procmux$407_CMP
+  found ctrl input: $procmux$432_CMP
+  found ctrl input: $eq$src/train_detection.v:77$319_Y
+  found ctrl input: $logic_and$src/train_detection.v:185$344_Y
+  found ctrl input: $logic_and$src/train_detection.v:168$334_Y
+  found state code: 3'100
+  found ctrl input: $logic_and$src/train_detection.v:166$329_Y
+  found state code: 3'011
+  found ctrl input: \track_filtered
+  found state code: 3'010
+  found ctrl input: \entry_rising
+  found ctrl input: \exit_rising
+  found state code: 3'001
+  found state code: 3'101
+  found ctrl output: $eq$src/train_detection.v:77$319_Y
+  found ctrl output: $procmux$432_CMP
+  found ctrl output: $procmux$407_CMP
+  found ctrl output: $procmux$392_CMP
+  found ctrl output: $procmux$381_CMP
+  ctrl inputs: { $logic_and$src/train_detection.v:185$344_Y $logic_and$src/train_detection.v:168$334_Y $logic_and$src/train_detection.v:166$329_Y $logic_and$src/train_detection.v:77$324_Y \exit_rising \entry_rising \track_filtered }
+  ctrl outputs: { $eq$src/train_detection.v:77$319_Y $procmux$407_CMP $procmux$432_CMP $procmux$381_CMP $procmux$392_CMP \next_state }
+  transition:      3'000 7'---000- ->      3'000 8'10000000
+  transition:      3'000 7'---010- ->      3'001 8'10000001
+  transition:      3'000 7'---0-1- ->      3'001 8'10000001
+  transition:      3'000 7'---1--- ->      3'101 8'10000101
+  transition:      3'100 7'---0--- ->      3'000 8'00000000
+  transition:      3'100 7'---1--- ->      3'101 8'00000101
+  transition:      3'010 7'-000--- ->      3'010 8'01000010
+  transition:      3'010 7'-100--- ->      3'100 8'01000100
+  transition:      3'010 7'--10--- ->      3'011 8'01000011
+  transition:      3'010 7'---1--- ->      3'101 8'01000101
+  transition:      3'001 7'---0--0 ->      3'001 8'00100001
+  transition:      3'001 7'---0--1 ->      3'010 8'00100010
+  transition:      3'001 7'---1--- ->      3'101 8'00100101
+  transition:      3'101 7'0--0--- ->      3'101 8'00010101
+  transition:      3'101 7'1--0--- ->      3'000 8'00010000
+  transition:      3'101 7'---1--- ->      3'101 8'00010101
+  transition:      3'011 7'-0-0--- ->      3'011 8'00001011
+  transition:      3'011 7'-1-0--- ->      3'100 8'00001100
+  transition:      3'011 7'---1--- ->      3'101 8'00001101
+
+10.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\current_state$1075' from module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+
+10.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+Removed 14 unused cells and 14 unused wires.
+<suppressed ~15 debug messages>
+
+10.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+Optimizing FSM `$fsm$\current_state$1075' from module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+  Removing unused output signal $procmux$392_CMP.
+  Removing unused output signal $procmux$381_CMP.
+  Removing unused output signal $procmux$432_CMP.
+  Removing unused output signal $procmux$407_CMP.
+
+10.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+Recoding FSM `$fsm$\current_state$1075' from module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011' using `auto' encoding:
+  mapping auto encoding to `one-hot` for this FSM.
+  000 -> -----1
+  100 -> ----1-
+  010 -> ---1--
+  001 -> --1---
+  101 -> -1----
+  011 -> 1-----
+
+10.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+FSM `$fsm$\current_state$1075' from module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011':
+-------------------------------------
+
+  Information on FSM $fsm$\current_state$1075 (\current_state):
+
+  Number of input signals:    7
+  Number of output signals:   4
+  Number of state bits:       6
+
+  Input signals:
+    0: \track_filtered
+    1: \entry_rising
+    2: \exit_rising
+    3: $logic_and$src/train_detection.v:77$324_Y
+    4: $logic_and$src/train_detection.v:166$329_Y
+    5: $logic_and$src/train_detection.v:168$334_Y
+    6: $logic_and$src/train_detection.v:185$344_Y
+
+  Output signals:
+    0: \next_state [0]
+    1: \next_state [1]
+    2: \next_state [2]
+    3: $eq$src/train_detection.v:77$319_Y
+
+  State encoding:
+    0:   6'-----1  <RESET STATE>
+    1:   6'----1-
+    2:   6'---1--
+    3:   6'--1---
+    4:   6'-1----
+    5:   6'1-----
+
+  Transition Table (state_in, ctrl_in, state_out, ctrl_out):
+      0:     0 7'---000-   ->     0 4'1000
+      1:     0 7'---010-   ->     3 4'1001
+      2:     0 7'---0-1-   ->     3 4'1001
+      3:     0 7'---1---   ->     4 4'1101
+      4:     1 7'---0---   ->     0 4'0000
+      5:     1 7'---1---   ->     4 4'0101
+      6:     2 7'-100---   ->     1 4'0100
+      7:     2 7'-000---   ->     2 4'0010
+      8:     2 7'---1---   ->     4 4'0101
+      9:     2 7'--10---   ->     5 4'0011
+     10:     3 7'---0--1   ->     2 4'0010
+     11:     3 7'---0--0   ->     3 4'0001
+     12:     3 7'---1---   ->     4 4'0101
+     13:     4 7'1--0---   ->     0 4'0000
+     14:     4 7'0--0---   ->     4 4'0101
+     15:     4 7'---1---   ->     4 4'0101
+     16:     5 7'-1-0---   ->     1 4'0100
+     17:     5 7'---1---   ->     4 4'0101
+     18:     5 7'-0-0---   ->     5 4'0011
+
+-------------------------------------
+
+10.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+Mapping FSM `$fsm$\current_state$1075' from module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+
+11. Executing OPT pass (performing simple optimizations).
+
+11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+<suppressed ~15 debug messages>
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+<suppressed ~78 debug messages>
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 26 cells.
+
+11.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \gate_safety_interlock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \railway_level_crossing_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+11.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+  Optimizing cells in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+  Optimizing cells in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+  Optimizing cells in module \gate_safety_interlock.
+  Optimizing cells in module \railway_level_crossing_top.
+Performed a total of 0 changes.
+
+11.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 0 cells.
+
+11.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+Removed 0 unused cells and 36 unused wires.
+<suppressed ~1 debug messages>
+
+11.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+11.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \gate_safety_interlock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \railway_level_crossing_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+11.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+  Optimizing cells in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+  Optimizing cells in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+  Optimizing cells in module \gate_safety_interlock.
+  Optimizing cells in module \railway_level_crossing_top.
+Performed a total of 0 changes.
+
+11.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 0 cells.
+
+11.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+
+11.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+11.16. Finished OPT passes. (There is nothing left to do.)
+
+12. Executing MEMORY pass.
+
+12.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+12.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+12.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+12.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+12.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+12.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+
+12.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+12.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+12.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+
+12.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+12.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+13. Executing OPT pass (performing simple optimizations).
+
+13.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+13.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 0 cells.
+
+13.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \gate_safety_interlock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \railway_level_crossing_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~22 debug messages>
+
+13.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+  Optimizing cells in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+  Optimizing cells in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+  Optimizing cells in module \gate_safety_interlock.
+  Optimizing cells in module \railway_level_crossing_top.
+Performed a total of 0 changes.
+
+13.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 0 cells.
+
+13.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+13.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+
+13.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+13.9. Finished OPT passes. (There is nothing left to do.)
+
+14. Executing TECHMAP pass (map to technology primitives).
+
+14.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+14.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$c5c783b17ab1d780abfad8cfe6563a0a7b47a3b0\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $ne.
+Using extmapper simplemap for cells of type $reduce_and.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $adffe.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=8:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=8:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=8:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$c3cd1564c35d873179656addd6052d7ea8b6d991\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using template $paramod$068ad458e7761d78e5eed8238508872e7b0aef95\_90_pmux for cells of type $pmux.
+Running "alumacc" on wrapper $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$lt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$gt:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=8:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=8:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=7:B_SIGNED=0:B_WIDTH=7:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=7:B_SIGNED=0:B_WIDTH=7:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$ge:A_SIGNED=0:A_WIDTH=7:B_SIGNED=0:B_WIDTH=7:Y_WIDTH=1:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$d629d85c8826a74239b9178d1930215a43b0ceb0\_90_pmux for cells of type $pmux.
+Using template $paramod$fc16b9f758000d363d24f130038bd99b46b4fa1b\_90_pmux for cells of type $pmux.
+Using template $paramod$b756e651b7db7aeb455331d9a2df073db93fcc2e\_90_pmux for cells of type $pmux.
+Using template $paramod$91f82ead1edc61e0a1452110f15ef747116b421b\_90_alu for cells of type $alu.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using template $paramod$dbcdc7e8aa1a4080cea2deda6fdc8772064f4d90\_90_alu for cells of type $alu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000111 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~1948 debug messages>
+
+15. Executing OPT pass (performing simple optimizations).
+
+15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+<suppressed ~1435 debug messages>
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+<suppressed ~49 debug messages>
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+<suppressed ~27 debug messages>
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+<suppressed ~43 debug messages>
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+<suppressed ~810 debug messages>
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+<suppressed ~3 debug messages>
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+<suppressed ~57 debug messages>
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 293 cells.
+
+15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \gate_safety_interlock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \railway_level_crossing_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+  Optimizing cells in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+  Optimizing cells in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+  Optimizing cells in module \gate_safety_interlock.
+  Optimizing cells in module \railway_level_crossing_top.
+Performed a total of 0 changes.
+
+15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 0 cells.
+
+15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+Removed 67 unused cells and 1312 unused wires.
+<suppressed ~71 debug messages>
+
+15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+<suppressed ~3 debug messages>
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+15.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+15.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \gate_safety_interlock..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \railway_level_crossing_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+15.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+  Optimizing cells in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+  Optimizing cells in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+  Optimizing cells in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+  Optimizing cells in module \gate_safety_interlock.
+  Optimizing cells in module \railway_level_crossing_top.
+Performed a total of 0 changes.
+
+15.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Finding identical cells in module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Finding identical cells in module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Finding identical cells in module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Finding identical cells in module `\gate_safety_interlock'.
+Finding identical cells in module `\railway_level_crossing_top'.
+Removed a total of 0 cells.
+
+15.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+15.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller..
+Finding unused cells or wires in module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module..
+Finding unused cells or wires in module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100..
+Finding unused cells or wires in module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011..
+Finding unused cells or wires in module \gate_safety_interlock..
+Finding unused cells or wires in module \railway_level_crossing_top..
+
+15.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller.
+Optimizing module $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module.
+Optimizing module $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100.
+Optimizing module $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011.
+Optimizing module gate_safety_interlock.
+Optimizing module railway_level_crossing_top.
+
+15.16. Finished OPT passes. (There is nothing left to do.)
+
+16. Executing ABC pass (technology mapping using ABC).
+
+16.1. Extracting gate netlist of module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller' to `<abc-temp-dir>/input.blif'..
+Replacing 47 occurrences of constant undef bits with constant zero bits
+Extracted 295 gates and 324 wires to a netlist network with 26 inputs and 33 outputs.
+
+16.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+16.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       27
+ABC RESULTS:              NAND cells:       26
+ABC RESULTS:               NOR cells:       14
+ABC RESULTS:               NOT cells:        6
+ABC RESULTS:                OR cells:       10
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:              ZERO cells:       12
+ABC RESULTS:        internal signals:      265
+ABC RESULTS:           input signals:       26
+ABC RESULTS:          output signals:       33
+Removing temp directory.
+
+16.2. Extracting gate netlist of module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module' to `<abc-temp-dir>/input.blif'..
+Extracted 42 gates and 65 wires to a netlist network with 21 inputs and 17 outputs.
+
+16.2.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+16.2.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       11
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:              NAND cells:        4
+ABC RESULTS:               NOR cells:        7
+ABC RESULTS:               NOT cells:        3
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:        8
+ABC RESULTS:        internal signals:       27
+ABC RESULTS:           input signals:       21
+ABC RESULTS:          output signals:       17
+Removing temp directory.
+
+16.3. Extracting gate netlist of module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100' to `<abc-temp-dir>/input.blif'..
+Extracted 34 gates and 47 wires to a netlist network with 13 inputs and 10 outputs.
+
+16.3.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+16.3.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        3
+ABC RESULTS:              NAND cells:        8
+ABC RESULTS:               NOR cells:        4
+ABC RESULTS:               NOT cells:        3
+ABC RESULTS:                OR cells:        1
+ABC RESULTS:              XNOR cells:        1
+ABC RESULTS:               XOR cells:        2
+ABC RESULTS:        internal signals:       24
+ABC RESULTS:           input signals:       13
+ABC RESULTS:          output signals:       10
+Removing temp directory.
+
+16.4. Extracting gate netlist of module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011' to `<abc-temp-dir>/input.blif'..
+Replacing 5 occurrences of constant undef bits with constant zero bits
+Extracted 126 gates and 149 wires to a netlist network with 20 inputs and 19 outputs.
+
+16.4.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+16.4.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       18
+ABC RESULTS:               MUX cells:        3
+ABC RESULTS:              NAND cells:       21
+ABC RESULTS:               NOR cells:        6
+ABC RESULTS:               NOT cells:       12
+ABC RESULTS:                OR cells:        7
+ABC RESULTS:        internal signals:      110
+ABC RESULTS:           input signals:       20
+ABC RESULTS:          output signals:       19
+Removing temp directory.
+
+16.5. Extracting gate netlist of module `\gate_safety_interlock' to `<abc-temp-dir>/input.blif'..
+Extracted 10 gates and 16 wires to a netlist network with 6 inputs and 4 outputs.
+
+16.5.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library <abc-temp-dir>/stdcells.genlib 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+16.5.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:        1
+ABC RESULTS:               NOR cells:        1
+ABC RESULTS:               NOT cells:        1
+ABC RESULTS:                OR cells:        3
+ABC RESULTS:        internal signals:        6
+ABC RESULTS:           input signals:        6
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+
+16.6. Extracting gate netlist of module `\railway_level_crossing_top' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+Removed 0 unused cells and 461 unused wires.
+
+17. Printing statistics.
+
+=== $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller ===
+
+   Number of wires:                100
+   Number of wire bits:            157
+   Number of public wires:          23
+   Number of public wire bits:      58
+   Number of ports:                 17
+   Number of port bits:             24
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                109
+     $_AND_                         27
+     $_DFFE_PN0P_                   23
+     $_DFFE_PN1P_                    1
+     $_DFF_PN0_                      1
+     $_NAND_                        26
+     $_NOR_                         14
+     $_NOT_                          6
+     $_OR_                          10
+     $_XNOR_                         1
+
+=== $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module ===
+
+   Number of wires:                 49
+   Number of wire bits:             75
+   Number of public wires:          21
+   Number of public wire bits:      31
+   Number of ports:                 17
+   Number of port bits:             20
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 54
+     $_AND_                         11
+     $_DFFE_PN0P_                    2
+     $_DFF_PN0_                     16
+     $_MUX_                          1
+     $_NAND_                         4
+     $_NOR_                          7
+     $_NOT_                          3
+     $_OR_                           1
+     $_XNOR_                         1
+     $_XOR_                          8
+
+=== $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100 ===
+
+   Number of wires:                 33
+   Number of wire bits:             43
+   Number of public wires:          19
+   Number of public wire bits:      23
+   Number of ports:                 17
+   Number of port bits:             18
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 26
+     $_AND_                          3
+     $_DFF_PN0_                      4
+     $_NAND_                         8
+     $_NOR_                          4
+     $_NOT_                          3
+     $_OR_                           1
+     $_XNOR_                         1
+     $_XOR_                          2
+
+=== $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011 ===
+
+   Number of wires:                 93
+   Number of wire bits:            106
+   Number of public wires:          26
+   Number of public wire bits:      39
+   Number of ports:                 13
+   Number of port bits:             13
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 92
+     $_AND_                         18
+     $_DFFE_PN0P_                    5
+     $_DFF_PN0_                     19
+     $_DFF_PN1_                      1
+     $_MUX_                          3
+     $_NAND_                        21
+     $_NOR_                          6
+     $_NOT_                         12
+     $_OR_                           7
+
+=== gate_safety_interlock ===
+
+   Number of wires:                 13
+   Number of wire bits:             13
+   Number of public wires:          11
+   Number of public wire bits:      11
+   Number of ports:                 10
+   Number of port bits:             10
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  6
+     $_AND_                          1
+     $_NOR_                          1
+     $_NOT_                          1
+     $_OR_                           3
+
+=== railway_level_crossing_top ===
+
+   Number of wires:                 44
+   Number of wire bits:             53
+   Number of public wires:          44
+   Number of public wire bits:      53
+   Number of ports:                 31
+   Number of port bits:             40
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  5
+     $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller      1
+     $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module      1
+     $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100      1
+     $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011      1
+     gate_safety_interlock           1
+
+=== design hierarchy ===
+
+   railway_level_crossing_top        1
+     $paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller      1
+     $paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module      1
+     $paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100      1
+     $paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011      1
+     gate_safety_interlock           1
+
+   Number of wires:                332
+   Number of wire bits:            447
+   Number of public wires:         144
+   Number of public wire bits:     215
+   Number of ports:                105
+   Number of port bits:            125
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                287
+     $_AND_                         60
+     $_DFFE_PN0P_                   30
+     $_DFFE_PN1P_                    1
+     $_DFF_PN0_                     40
+     $_DFF_PN1_                      1
+     $_MUX_                          4
+     $_NAND_                        59
+     $_NOR_                         32
+     $_NOT_                         25
+     $_OR_                          22
+     $_XNOR_                         3
+     $_XOR_                         10
+
+18. Executing Verilog backend.
+
+18.1. Executing BMUXMAP pass.
+
+18.2. Executing DEMUXMAP pass.
+Dumping module `$paramod$8f07a53fb3f153a5615253fd90994bcc5d80aa8d\gate_controller'.
+Dumping module `$paramod$dfce5057df65530a1e7cfd1c2d6f4d0385b1b09d\emergency_warning_module'.
+Dumping module `$paramod\traffic_light_controller\BLINK_DIV=s32'00000000000000000000000000000100'.
+Dumping module `$paramod\train_detection\DEBOUNCE_CYCLES=s32'00000000000000000000000000000011'.
+Dumping module `\gate_safety_interlock'.
+Dumping module `\railway_level_crossing_top'.
+
+End of script. Logfile hash: 107dbe9cb0, CPU: user 0.32s system 0.02s, MEM: 25.40 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 42% 1x abc (0 sec), 15% 21x opt_expr (0 sec), ...
