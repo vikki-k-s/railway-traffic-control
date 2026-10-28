@@ -19,10 +19,10 @@
 
 | Sl. No. | Student Name | USN / Roll No. | Project Role | Core Contribution Area | % Contribution | Signature |
 |:---:|:---|:---:|:---|:---|:---:|:---:|
-| 1 | **Team Lead (Student 1)** | `01GM24EC001` | System Architect & Lead | Top-level Hierarchical Design, Integration, FSM Controller | 25% | _________ |
-| 2 | **Member 2 (Student 2)** | `01GM24EC002` | Hardware Interlock Specialist | Gate-Level Modelling, Safety Interlocks, Primitives Logic | 25% | _________ |
-| 3 | **Member 3 (Student 3)** | `01GM24EC003` | Actuator & Traffic Engineer | Traffic Light Controller, Emergency Warning, Sound/LEDs | 25% | _________ |
-| 4 | **Member 4 (Student 4)** | `01GM24EC004` | Verification & Synthesis Lead | Testbench, Multitasking Tasks/Functions, Yosys Synthesis | 25% | _________ |
+| 1 | **Vikas K S (Lead)** | `U26E02EC521` | System Architect & Lead | Top-level Hierarchical Design, Integration, FSM Controller | 25% | _________ |
+| 2 | **Nandan S L** | `U26E02EC518` | Hardware Interlock Specialist | Gate-Level Modelling, Safety Interlocks, Primitives Logic | 25% | _________ |
+| 3 | **Meghana P** | `U25E02EC070` | Actuator & Traffic Engineer | Traffic Light Controller, Emergency Warning, Sound/LEDs | 25% | _________ |
+| 4 | **Keerthana R F** | `U25E02EC053` | Verification & Synthesis Lead | Testbench, Multitasking Tasks/Functions, Yosys Synthesis | 25% | _________ |
 
 **Evaluation Faculty Signatures:**
 

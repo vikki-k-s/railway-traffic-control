@@ -183,12 +183,12 @@ All five automated self-checking test cases passed with zero safety violations:
 
 ## 👥 Student Team & Individual Contribution Declaration
 
-| Sl. No. | Student Name | Role | Core Contribution Area | Share |
-|:---:|:---|:---|:---|:---:|
-| 1 | **Vikas K S (Lead)** | System Architect | Top-level Hierarchy, State Machine Controller | 25% |
-| 2 | **Team Member 2** | Interlock Specialist | Gate-level Safety Interlock, Primitives Logic | 25% |
-| 3 | **Team Member 3** | Traffic & Actuator Lead | Traffic Light Controller, Emergency Warning, Sound/LEDs | 25% |
-| 4 | **Team Member 4** | Verification & Synthesis | Testbench Tasks/Functions, Yosys Synthesis & Netlists | 25% |
+| Sl. No. | Student Name | USN | Project Role | Core Contribution Area | Share |
+|:---:|:---|:---:|:---|:---|:---:|
+| 1 | **Vikas K S (Lead)** | `U26E02EC521` | System Architect | Top-level Hierarchy, State Machine Controller | 25% |
+| 2 | **Nandan S L** | `U26E02EC518` | Interlock Specialist | Gate-level Safety Interlock, Primitives Logic | 25% |
+| 3 | **Meghana P** | `U25E02EC070` | Traffic & Actuator Lead | Traffic Light Controller, Emergency Warning, Sound/LEDs | 25% |
+| 4 | **Keerthana R F** | `U25E02EC053` | Verification & Synthesis | Testbench Tasks/Functions, Yosys Synthesis & Netlists | 25% |
 
 ---
 
