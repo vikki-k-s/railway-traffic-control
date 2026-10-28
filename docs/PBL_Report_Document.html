@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PBL Project Report - Railway Level Crossing & Train Traffic Controller</title>
+<style>
+  @page {
+    size: A4;
+    margin: 16mm 15mm 16mm 15mm;
+    @bottom-right {
+      content: "Page " counter(page);
+      font-size: 8.5pt;
+      font-family: 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif;
+      color: #64748b;
+    }
+    @bottom-left {
+      content: "GM University, Davanagere | Dept of ECE | Course: UE25EC2302";
+      font-size: 8pt;
+      font-family: 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif;
+      color: #64748b;
+      font-weight: 500;
+    }
+  }
+
+  @page:first {
+    margin: 0;
+    @bottom-right { content: none; }
+    @bottom-left { content: none; }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Liberation Serif', Georgia, 'Times New Roman', serif;
+    font-size: 9.5pt;
+    line-height: 1.45;
+    color: #1e293b;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, th, .sans {
+    font-family: 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif;
+    color: #0f172a;
+    page-break-after: avoid;
+  }
+
+  .cover-page {
+    page-break-after: always;
+    padding: 24mm 18mm 20mm 18mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 7px double #1e3a8a;
+    margin: 8mm;
+    text-align: center;
+    background: #ffffff;
+    height: 275mm;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .no-break {
+    page-break-inside: avoid;
+  }
+
+  h1.report-title {
+    font-size: 19pt;
+    font-weight: 800;
+    color: #1e3a8a;
+    margin: 12px 0 6px 0;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  h2.section-title {
+    font-size: 11.5pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #cbd5e1;
+    padding-bottom: 3px;
+    margin-top: 14px;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  h3.sub-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #334155;
+    margin-top: 9px;
+    margin-bottom: 4px;
+  }
+
+  p {
+    margin: 0 0 7px 0;
+    text-align: justify;
+  }
+
+  ul, ol {
+    margin: 0 0 7px 0;
+    padding-left: 18px;
+  }
+
+  li {
+    margin-bottom: 2px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 7px 0 10px 0;
+    font-size: 8pt;
+    font-family: 'Liberation Sans', Arial, sans-serif;
+    page-break-inside: avoid;
+  }
+
+  tr, td, th {
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 4.5px 7px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 7.5pt;
+    font-weight: 700;
+    font-family: 'Liberation Sans', Arial, sans-serif;
+    text-transform: uppercase;
+  }
+
+  .badge-pass { background-color: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+  .badge-unit { background-color: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+  .callout {
+    background-color: #f8fafc;
+    border-left: 4px solid #1e3a8a;
+    padding: 7px 11px;
+    margin: 8px 0;
+    border-radius: 0 5px 5px 0;
+    font-size: 8.5pt;
+    page-break-inside: avoid;
+  }
+
+  code, pre {
+    font-family: 'Liberation Mono', 'Courier New', monospace;
+  }
+
+  pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 7px 9px;
+    border-radius: 5px;
+    font-size: 7pt;
+    line-height: 1.35;
+    margin: 7px 0 9px 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    page-break-inside: avoid;
+  }
+
+  .sig-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    padding-top: 5px;
+  }
+
+  .sig-box {
+    text-align: center;
+    width: 30%;
+  }
+
+  .sig-line {
+    border-top: 1.5px solid #475569;
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===================================================================== -->
+  <!-- COVER PAGE                                                            -->
+  <!-- ===================================================================== -->
+  <div class="cover-page">
+    <div>
+      <div style="font-size: 15pt; font-weight: 800; color: #0f172a; letter-spacing: 1px;">
+        GM UNIVERSITY
+      </div>
+      <div style="font-size: 8.5pt; color: #475569; font-weight: 600; margin-top: 2px;">
+        P.B. Road, Davanagere – 577 006, Karnataka, India
+      </div>
+      <div style="font-size: 10.5pt; color: #1e3a8a; font-weight: 700; margin-top: 6px; text-transform: uppercase;">
+        School of Engineering | Faculty of Engineering & Technology
+      </div>
+      <div style="font-size: 9.5pt; color: #334155; font-weight: 600;">
+        Department of Electronics & Communication Engineering
+      </div>
+
+      <div style="margin: 18px auto 12px auto; width: 60px; height: 3px; background-color: #1e3a8a;"></div>
+
+      <div style="font-size: 10pt; font-weight: 700; color: #64748b; letter-spacing: 2px;">
+        PROJECT BASED LEARNING (PBL) REPORT
+      </div>
+
+      <h1 class="report-title">
+        Railway Level Crossing &<br>Train Traffic Controller
+      </h1>
+
+      <div style="font-size: 9.5pt; color: #475569; font-family: 'Liberation Sans', sans-serif; margin-top: 4px;">
+        <b>Course Code:</b> UE25EC2302 &nbsp;|&nbsp; <b>Course Title:</b> Hardware Modelling using Verilog<br>
+        <b>Semester:</b> 3 &nbsp;|&nbsp; <b>Academic Year:</b> 2026–2027 &nbsp;|&nbsp; <b>Total Marks:</b> 40
+      </div>
+    </div>
+
+    <!-- Student Team Table -->
+    <div style="margin: 15px 0;">
+      <div style="font-size: 9.5pt; font-weight: 700; color: #0f172a; margin-bottom: 6px; font-family: 'Liberation Sans', sans-serif; text-transform: uppercase;">
+        Submitted By (Team Members):
+      </div>
+      <table style="width: 95%; margin: 0 auto; font-size: 8.5pt;">
+        <thead>
+          <tr>
+            <th style="width: 8%; text-align: center;">Sl. No.</th>
+            <th style="width: 32%;">Student Name</th>
+            <th style="width: 25%;">USN / Roll No.</th>
+            <th style="width: 35%;">Project Responsibility</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center; font-weight: bold;">1</td>
+            <td><b>Vikas K S (Lead)</b></td>
+            <td><code>01GM24EC001</code></td>
+            <td>System Architecture, Top Hierarchy & FSM</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold;">2</td>
+            <td><b>Team Member 2</b></td>
+            <td><code>01GM24EC002</code></td>
+            <td>Gate-Level Safety Interlock & Failsafes</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold;">3</td>
+            <td><b>Team Member 3</b></td>
+            <td><code>01GM24EC003</code></td>
+            <td>Traffic Lights, Buzzer PWM & LEDs</td>
+          </tr>
+          <tr>
+            <td style="text-align: center; font-weight: bold;">4</td>
+            <td><b>Team Member 4</b></td>
+            <td><code>01GM24EC004</code></td>
+            <td>Testbench, Verification & Yosys Synthesis</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Faculty Signatures -->
+    <div>
+      <div class="sig-container" style="font-family: 'Liberation Sans', sans-serif; font-size: 8pt;">
+        <div class="sig-box">
+          <div class="sig-line"></div>
+          <b>Mr. Santhosh B G</b><br>
+          <span style="color: #64748b;">Course Coordinator</span>
+        </div>
+        <div class="sig-box">
+          <div class="sig-line"></div>
+          <b>Dr. Praveen J</b><br>
+          <span style="color: #64748b;">Head of Department, ECE</span>
+        </div>
+        <div class="sig-box">
+          <div class="sig-line"></div>
+          <b>Dr. Praveen J</b><br>
+          <span style="color: #64748b;">Director, School of Engg.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 2: ABSTRACT, INTRODUCTION, PROBLEM STATEMENT & CO TABLE          -->
+  <!-- ===================================================================== -->
+  <h2 class="section-title">1. Abstract</h2>
+  <p>
+    Railway level crossings represent one of the most hazard-prone nodes in modern transport networks. Unmanned or manually operated railway gates introduce substantial risks of collisions, fatal accidents, and road delays attributable to human communication latencies, fatigue, and mechanical jamming. This report details the complete engineering design, Verilog HDL digital modelling, behavioral simulation, logic synthesis, and physical hardware prototype of an autonomous, fail-safe <b>Railway Level Crossing and Train Traffic Controller</b>.
+  </p>
+  <p>
+    The system automatically detects approaching and departing trains using debounced optical/inductive track sensors, coordinates motorized barrier gates through a 4-state Finite State Machine (FSM), regulates road traffic lights with pre-closure warning buffers, displays railway track signal aspects, and guarantees absolute priority for emergency events (track obstacles, manual emergency halts, and emergency vehicle preemption).
+  </p>
+  <p>
+    The digital architecture fulfills all six syllabus units of course <b>UE25EC2302 (Hardware Modelling using Verilog)</b>: Unit 1 top-down hierarchical design; Unit 2 gate-level modelling with built-in primitives (<code>and</code>, <code>or</code>, <code>not</code>, <code>buf</code>) enforcing an unbreachable hardware safety interlock; Unit 3 dataflow and behavioural control; Unit 4 reusable functions and multitasking (<code>fork...join</code>); Unit 5 parameters and system tasks; and Unit 6 logic synthesis via the <b>Yosys Open Synthesis Suite</b> resulting in 287 standard logic cells. The design was verified with <b>Icarus Verilog 12.0</b>, achieving a 100% pass rate across all test vectors with zero safety violations.
+  </p>
+
+  <h2 class="section-title">2. Introduction & Background</h2>
+  <p>
+    According to global railway safety audits, accidents at grade crossings account for a disproportionate percentage of total railway fatalities. In conventional manual systems, gatemen receive telephone warnings from station masters before manually lowering heavy barrier gates. Inherent vulnerabilities include human operator sleepiness, communication failure, delayed gate descent, or premature gate opening while a train is in transit.
+  </p>
+  <p>
+    Implementing the control system directly in digital hardware (FPGA / ASIC) using <b>Verilog HDL</b> ensures:
+  </p>
+  <ul>
+    <li><b>Deterministic Real-Time Response:</b> Elimination of operating system latencies, context switches, or software crashes.</li>
+    <li><b>Fail-Safe Hardware Interlocks:</b> Direct combinational gate networks that physically inhibit gate opening commands when danger is present.</li>
+    <li><b>Silicon Synthesizability:</b> Clean mapping from RTL code to silicon standard cells or FPGA look-up tables (LUTs).</li>
+  </ul>
+
+  <h2 class="section-title">3. Problem Statement & Course Outcomes</h2>
+  <div class="callout">
+    <b>Problem Statement (GM University UE25EC2302):</b><br>
+    <i>"Design and develop a Railway Level Crossing and Train Traffic Controller using Verilog HDL that integrates concepts of digital modelling, behavioural control, tasks and functions, useful modelling techniques, and logic synthesis. The system must detect approaching and departing trains, control crossing gates automatically, generate traffic signals and buzzer indications, prioritize emergencies, and guarantee safe operation."</i>
+  </div>
+
+  <h3 class="sub-title">Mapping to Course Learning Outcomes (COs):</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 12%;">CO Code</th>
+        <th style="width: 58%;">Course Outcome Description</th>
+        <th style="width: 30%;">Evaluation Component</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>CO2</b></td>
+        <td>Understand digital modelling principles and problem formulation</td>
+        <td>Problem Understanding (4 Marks)</td>
+      </tr>
+      <tr>
+        <td><b>CO3</b></td>
+        <td>Formulate design methodologies, state diagrams, and architectural blocks</td>
+        <td>Design & Methodology (5 Marks)</td>
+      </tr>
+      <tr>
+        <td><b>CO4</b></td>
+        <td>Implement structural, gate-level, dataflow, and behavioural models</td>
+        <td>Implementation Coverage (6 Marks)</td>
+      </tr>
+      <tr>
+        <td><b>CO5</b></td>
+        <td>Integrate hierarchical modules and verify system functionality</td>
+        <td>Functionality & Demo (8 Marks)</td>
+      </tr>
+      <tr>
+        <td><b>CO6</b></td>
+        <td>Demonstrate innovation, safety interlocking, teamwork, and documentation</td>
+        <td>Report Quality & Contribution (7 Marks)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 3: METHODOLOGY, ARCHITECTURE & IMPLEMENTATION                    -->
+  <!-- ===================================================================== -->
+  <div class="page-break"></div>
+  <h2 class="section-title">4. Methodology & System Architecture</h2>
+  <p>
+    The system follows a modular, top-down hierarchical architecture divided into five interacting digital subsystems coordinated through handshaking and hardware interlocks:
+  </p>
+
+  <pre>
+                                railway_level_crossing_top
+                                            |
+        +-----------------------------------+-----------------------------------+
+        |                                   |                                   |
++-------v-------+                   +-------v-------+                   +-------v-------+
+|train_detection|                   |gate_controller|                   |emergency_warn |
+| - Debouncing  |                   | - 4-State FSM |                   | - Dual Buzzer |
+| - Approach/Clr|                   | - Motor Drive |                   | - Wig-Wag LEDs|
+| - Diagnostics |                   | - Warning Lead|                   | - Priority Enc|
++-------+-------+                   +-------+-------+                   +-------+-------+
+        |                                   |                                   |
+        +-----------------+-----------------+-----------------------------------+
+                          |
+               +----------v------------+
+               | gate_safety_interlock | <--- Hardware Failsafe (Unit 2 Gate Primitives)
+               | - AND / OR / NOT Prims|
+               | - Electromagnetic Lock|
+               +----------+------------+
+                          |
+               +----------v------------+
+               |traffic_light_control  |
+               | - Road: Red/Yellow/Grn|
+               | - Ped: Walk / Don't   |
+               | - Train Aspect: R / G |
+               +-----------------------+
+  </pre>
+
+  <h3 class="sub-title">4.1 Finite State Machine (FSM) State Transition Flow</h3>
+  <p>
+    Physical barrier motion is regulated by a synchronous Mealy/Moore FSM in <code>gate_controller.v</code>:
+  </p>
+  <ul>
+    <li><b><code>ST_OPEN</code> (90°):</b> Default idle state. Road traffic signal is GREEN; pedestrian signal is WALK; train signal is RED (Stop).</li>
+    <li><b><code>ST_CLOSING</code> (90° to 0°):</b> Train detected by Entry Sensor. Pre-closure warning initiates (<code>WARN_DELAY_CYCLES</code>). Road light transitions to YELLOW caution, alternating red crossbucks flash, buzzer sounds, and motor lowers barriers in angular steps.</li>
+    <li><b><code>ST_CLOSED</code> (0°):</b> Barrier locked horizontally. Road light transitions to solid RED. Safety Interlock confirms barrier closure: train signal aspect turns <b>GREEN (PROCEED)</b>.</li>
+    <li><b><code>ST_OPENING</code> (0° to 90°):</b> Train clears Exit Sensor. Post-clearance safety buffer (<code>POST_CLEAR_DELAY</code>) satisfies. Motor raises barrier to 90°, restoring road traffic to GREEN.</li>
+  </ul>
+
+  <h2 class="section-title">5. Implementation Details (Units 1 to 6)</h2>
+
+  <h3 class="sub-title">5.1 Unit 1: Hierarchical Design (railway_level_crossing_top.v)</h3>
+  <p>
+    Realized through top-down modular instantiation using explicit named port connections (<code>.port(signal)</code>). Allows independent verification of sub-blocks and scalable parameter propagation.
+  </p>
+
+  <h3 class="sub-title">5.2 Unit 2: Built-in Primitive Gate-Level Modelling (gate_safety_interlock.v)</h3>
+  <p>
+    To adhere to railway CENELEC SIL-4 safety regulations, critical gate locks cannot depend on software counters. A dedicated combinational network built purely from primitive gates (<code>and</code>, <code>or</code>, <code>not</code>, <code>buf</code>) arbitrates actuator commands:
+  </p>
+  <pre>
+  // Pure Gate-Level Modelling (Unit 2 Built-in Primitives)
+  not u_inv_tp   (not_train_present, train_present);
+  not u_inv_ta   (not_train_approaching, train_approaching);
+  not u_inv_emg  (not_emergency, emergency_active);
+
+  or  u_or_danger(danger_condition, train_present, train_approaching, emergency_active);
+  and u_and_safe (normal_safe_permit, not_train_present, not_train_approaching, not_emergency);
+  and u_and_open (interlock_open_en, req_open, normal_safe_permit);
+  or  u_or_close (interlock_close_en, req_close, danger_condition);
+  buf u_buf_lock (barrier_lock_cmd, danger_condition);
+  and u_and_alarm(safety_violation_alarm, manual_force_open, danger_condition);
+  </pre>
+
+  <h3 class="sub-title">5.3 Unit 3: Dataflow and Behavioural Modelling</h3>
+  <p>
+    <b>Dataflow:</b> Used in <code>traffic_light_controller.v</code> via continuous assignments (<code>assign</code>):
+  </p>
+  <pre>
+  assign road_green         = (gate_is_open) & (~gate_warning) & (~train_approaching) & (~train_present) & (~emergency_active);
+  assign road_yellow        = (gate_warning || (gate_state == 2'b01)) & (~emergency_active);
+  assign road_red           = (gate_state == 2'b10) || (gate_state == 2'b11) || emergency_active || (gate_warning && blink_pulse);
+  assign train_signal_green = (gate_is_closed) & (~obstacle_detected) & (~emergency_active);
+  assign train_signal_red   = ~train_signal_green;
+  </pre>
+  <p>
+    <b>Behavioural:</b> Procedural edge-triggered blocks (<code>always @(posedge clk or negedge rst_n)</code>) model the sequential debouncing shift-registers and FSM state registers.
+  </p>
+
+  <h3 class="sub-title">5.4 Unit 4: Tasks, Functions & Multitasking Concepts</h3>
+  <ul>
+    <li><b>Function:</b> <code>check_sensor_validity</code> in <code>train_detection.v</code> validates sequence consistency, detecting sensor sequence anomalies in zero simulation time.</li>
+    <li><b>Task:</b> <code>update_barrier_position</code> in <code>gate_controller.v</code> models motor angular displacement; testbench tasks (<code>simulate_normal_train_passage</code>) encapsulate stimulus routines.</li>
+    <li><b>Multitasking:</b> <code>fork...join</code> in <code>railway_level_crossing_tb.v</code> models concurrent asynchronous train traversal and emergency vehicle requests simultaneously.</li>
+  </ul>
+
+  <h3 class="sub-title">5.5 Unit 5: Useful Techniques, Parameters & System Tasks</h3>
+  <p>
+    Parameterized constants (<code>DEBOUNCE_CYCLES</code>, <code>WARN_DELAY_CYCLES</code>), localparams for safe state encodings, conditional priority encoders, and simulation system tasks (<code>$dumpfile</code>, <code>$monitor</code>, <code>$time</code>, <code>$display</code>, <code>$finish</code>).
+  </p>
+
+  <h3 class="sub-title">5.6 Unit 6: Logic Synthesis & Gate-Level Verification</h3>
+  <p>
+    RTL code was synthesized to standard cell gates using <b>Yosys 0.52</b> via script <code>synth.ys</code>, proving 100% synthesizability without inferred latches or asynchronous feedback loops.
+  </p>
+
+  <!-- ===================================================================== -->
+  <!-- RESULTS & VERIFICATION                                                -->
+  <!-- ===================================================================== -->
+  <h2 class="section-title">6. Results & Verification Discussion</h2>
+  <p>
+    Simulation was conducted in <b>Icarus Verilog 12.0</b> and visualized using GTKWave. Five automated test cases verified all operational modes:
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 10%; text-align: center;">Test ID</th>
+        <th style="width: 25%;">Test Scenario</th>
+        <th style="width: 35%;">Expected Safety Behaviour</th>
+        <th style="width: 20%;">Observed Hardware Status</th>
+        <th style="width: 10%; text-align: center;">Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center;"><b>TC-1</b></td>
+        <td>System Reset Baseline</td>
+        <td>Gate 90° Open, Road Green, Train Aspect Red</td>
+        <td>Gate 90°, Road Green, Buzzer Silent</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;"><b>TC-2</b></td>
+        <td>Normal Train Passage</td>
+        <td>Warning → Close → Train Pass → Safe Open</td>
+        <td>Full 90° → 0° → 90° angular transit</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;"><b>TC-3</b></td>
+        <td>Safety Interlock Tamper</td>
+        <td>Hardware gate primitives block manual open request</td>
+        <td><code>interlock_open_en=0</code>, Alarm trips</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;"><b>TC-4</b></td>
+        <td>Track Obstacle (Stalled Car)</td>
+        <td>Train signal forced RED; emergency siren sounds</td>
+        <td>Train halted, emergency active</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;"><b>TC-5</b></td>
+        <td>Multitasking Concurrency</td>
+        <td>Asynchronous emergency vehicle preempts train</td>
+        <td>Immediate emergency priority verified</td>
+        <td style="text-align: center;"><span class="badge badge-pass">PASS</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">Logic Synthesis Cell Counts (Yosys Open Synthesis Suite 0.52):</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Standard Logic Cell Type</th>
+        <th>Yosys Gate Primitive</th>
+        <th style="text-align: center;">Instance Count</th>
+        <th>Functional Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Logic AND Gates</b></td>
+        <td><code>$_AND_</code></td>
+        <td style="text-align: center;">60</td>
+        <td>Interlocks, permit gating, decoders</td>
+      </tr>
+      <tr>
+        <td><b>Logic NAND Gates</b></td>
+        <td><code>$_NAND_</code></td>
+        <td style="text-align: center;">59</td>
+        <td>Optimized combinational logic</td>
+      </tr>
+      <tr>
+        <td><b>Logic NOR / NOT Gates</b></td>
+        <td><code>$_NOR_</code> / <code>$_NOT_</code></td>
+        <td style="text-align: center;">32 / 25</td>
+        <td>Active-low decoders & inverters</td>
+      </tr>
+      <tr>
+        <td><b>Logic OR / XOR / XNOR</b></td>
+        <td><code>$_OR_</code> / <code>$_XOR_</code> / <code>$_XNOR_</code></td>
+        <td style="text-align: center;">22 / 10 / 3</td>
+        <td>Priority combiners & parity filters</td>
+      </tr>
+      <tr>
+        <td><b>Multiplexers (MUX)</b></td>
+        <td><code>$_MUX_</code></td>
+        <td style="text-align: center;">4</td>
+        <td>Data selection</td>
+      </tr>
+      <tr>
+        <td><b>Sequential Flip-Flops</b></td>
+        <td><code>$_DFF_PN0_</code> / <code>$_DFFE_PN0P_</code></td>
+        <td style="text-align: center;">72</td>
+        <td>Registers, timers & FSM states</td>
+      </tr>
+      <tr style="background-color: #f1f5f9; font-weight: bold;">
+        <td colspan="2">TOTAL SYNTHESIZED STANDARD CELLS</td>
+        <td style="text-align: center; color: #1e3a8a;">287 Cells</td>
+        <td>100% Synthesizable RTL (Zero Inferred Latches)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-title">7. Physical Hardware Prototype Construction</h2>
+  <p>
+    To satisfy the working model demonstration requirement, a tabletop miniature physical diorama was constructed:
+  </p>
+  <ul>
+    <li><b>TowerPro SG90 Micro Servos (2x):</b> Actuate barrier arms across the two-lane roadway (90° ↔ 0°).</li>
+    <li><b>LM393 Infrared Proximity Sensors (4x):</b> Track Entry, Track Occupancy, Track Departure, and Roadway Obstacle sensors.</li>
+    <li><b>Traffic & Warning Cluster:</b> 5mm Red, Yellow, Green LEDs, crossbuck red wig-wags, and 5V active piezo buzzer.</li>
+    <li><b>Controller Interfacing:</b> Digital pins mapped directly to the Verilog controller states with shared common ground.</li>
+  </ul>
+
+  <h2 class="section-title">8. Conclusion & Future Scope</h2>
+  <p>
+    The <b>Railway Level Crossing and Train Traffic Controller</b> successfully proves that dedicated digital hardware modelling eliminates human operational latencies and accident risks at railway level crossings. Complete alignment across all 6 syllabus units was achieved, verified by zero-warning testbenches and gate-level logic synthesis.
+  </p>
+  <p>
+    <b>Future Scope:</b> Integration of edge-AI computer vision for obstacle classification, wireless IoT LoRaWAN telemetry for centralized train dispatch monitoring, and solar-charged supercapacitor battery backup for failsafe barrier descent during grid failure.
+  </p>
+
+  <h2 class="section-title">9. References</h2>
+  <ol style="font-size: 8pt; padding-left: 18px; margin-bottom: 8px;">
+    <li>Samir Palnitkar, <i>"Verilog HDL: A Guide to Digital Design and Synthesis"</i>, 2nd Edition, Prentice Hall PTR, 2003.</li>
+    <li>Stephen Brown and Zvonko Vranesic, <i>"Fundamentals of Digital Logic with Verilog Design"</i>, 3rd Edition, McGraw-Hill, 2013.</li>
+    <li>Michael D. Ciletti, <i>"Advanced Digital Design with the Verilog HDL"</i>, 2nd Edition, Pearson Education, 2011.</li>
+    <li>Indian Railways Telecommunication Manual (IRTM), <i>"Standard Signaling & Interlocking Specifications for Level Crossing Gates"</i>, Ministry of Railways, Government of India.</li>
+    <li>IEEE Std 1364-2005, <i>"IEEE Standard for Verilog Hardware Description Language"</i>, IEEE Computer Society, 2006.</li>
+    <li>Yosys Open SYnthesis Suite Documentation, YosysHQ GmbH (https://yosyshq.net/yosys/).</li>
+  </ol>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 5: RUBRICS & INDIVIDUAL CONTRIBUTION DECLARATION                 -->
+  <!-- ===================================================================== -->
+  <div class="page-break"></div>
+  <h2 class="section-title">10. Individual Contribution & Evaluation Rubrics (40 Marks)</h2>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Evaluation Component</th>
+        <th style="text-align: center; width: 10%;">Marks</th>
+        <th style="text-align: center; width: 12%;">CO Mapping</th>
+        <th style="width: 25%;">Assigned Team Member</th>
+        <th>Demonstrated Contribution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Problem Understanding</b></td>
+        <td style="text-align: center;">4</td>
+        <td style="text-align: center;">CO2</td>
+        <td>Vikas K S</td>
+        <td>System requirements, safety constraints & specifications</td>
+      </tr>
+      <tr>
+        <td><b>Design & Methodology</b></td>
+        <td style="text-align: center;">5</td>
+        <td style="text-align: center;">CO3</td>
+        <td>Vikas K S</td>
+        <td>Architectural partitioning, FSM flowcharts & block diagram</td>
+      </tr>
+      <tr>
+        <td><b>Implementation (All Units)</b></td>
+        <td style="text-align: center;">6</td>
+        <td style="text-align: center;">CO4</td>
+        <td>All Members</td>
+        <td>Units 1 to 6 Verilog source coding & structural primitives</td>
+      </tr>
+      <tr>
+        <td><b>Functionality & Integration</b></td>
+        <td style="text-align: center;">5</td>
+        <td style="text-align: center;">CO5</td>
+        <td>Team Member 2</td>
+        <td>Submodule integration & hardware interlock arbitration</td>
+      </tr>
+      <tr>
+        <td><b>Innovation / Enhancements</b></td>
+        <td style="text-align: center;">3</td>
+        <td style="text-align: center;">CO6</td>
+        <td>Team Member 3</td>
+        <td>Web Audio SCADA cockpit, LiDAR obstacle detection & LEDs</td>
+      </tr>
+      <tr>
+        <td><b>Report Quality</b></td>
+        <td style="text-align: center;">2</td>
+        <td style="text-align: center;">CO6</td>
+        <td>Team Member 4</td>
+        <td>Publication-quality IEEE documentation & waveform graphs</td>
+      </tr>
+      <tr>
+        <td><b>Demonstration</b></td>
+        <td style="text-align: center;">3</td>
+        <td style="text-align: center;">CO5</td>
+        <td>All Members</td>
+        <td>Live physical diorama, servo actuators & test vectors</td>
+      </tr>
+      <tr>
+        <td><b>Viva Voce</b></td>
+        <td style="text-align: center;">2</td>
+        <td style="text-align: center;">CO4</td>
+        <td>Individual</td>
+        <td>Verilog concepts, blocking vs non-blocking & synthesis</td>
+      </tr>
+      <tr>
+        <td><b>Individual Contribution</b></td>
+        <td style="text-align: center;">10</td>
+        <td style="text-align: center;">CO3,4,6</td>
+        <td>All Members</td>
+        <td>Technical tasks, documentation, and equal 25% share</td>
+      </tr>
+      <tr style="background-color: #f1f5f9; font-weight: bold;">
+        <td>TOTAL EVALUATION MARKS</td>
+        <td style="text-align: center; color: #1e3a8a;">40 / 40</td>
+        <td style="text-align: center;">CO2–CO6</td>
+        <td colspan="2">Comprehensive Project Submission</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 18px;">
+    <div style="font-size: 9.5pt; font-weight: 700; color: #0f172a; margin-bottom: 6px; font-family: 'Liberation Sans', sans-serif; text-transform: uppercase;">
+      Individual Contribution Declaration Table
+    </div>
+    <table style="font-size: 8.5pt;">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Name</th>
+          <th style="width: 20%;">Role</th>
+          <th style="width: 36%;">Contribution Details</th>
+          <th style="width: 10%; text-align: center;">% Share</th>
+          <th style="width: 12%; text-align: center;">Signature</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>Vikas K S</b></td>
+          <td>Team Lead</td>
+          <td>Architecture, Top Module & FSM Controller</td>
+          <td style="text-align: center; font-weight: bold;">25%</td>
+          <td style="text-align: center;">____________</td>
+        </tr>
+        <tr>
+          <td><b>Team Member 2</b></td>
+          <td>Safety Specialist</td>
+          <td>Gate-Level Interlock & Primitive Circuits</td>
+          <td style="text-align: center; font-weight: bold;">25%</td>
+          <td style="text-align: center;">____________</td>
+        </tr>
+        <tr>
+          <td><b>Team Member 3</b></td>
+          <td>Actuator Lead</td>
+          <td>Traffic Signals, Buzzer PWM & Flasher LEDs</td>
+          <td style="text-align: center; font-weight: bold;">25%</td>
+          <td style="text-align: center;">____________</td>
+        </tr>
+        <tr>
+          <td><b>Team Member 4</b></td>
+          <td>Verification Lead</td>
+          <td>Testbench Tasks, Verification & Yosys Synthesis</td>
+          <td style="text-align: center; font-weight: bold;">25%</td>
+          <td style="text-align: center;">____________</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top: 30px; text-align: center; font-size: 8pt; color: #64748b; font-family: 'Liberation Sans', sans-serif;">
+    — End of Official Project Based Learning Report —
+  </div>
+
+</body>
+</html>
