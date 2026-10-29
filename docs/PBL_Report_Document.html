@@ -586,15 +586,18 @@
     </tbody>
   </table>
 
-  <h2 class="section-title">7. Physical Hardware Prototype Construction</h2>
+  <h2 class="section-title">7. Physical Hardware Prototype Construction & Circuit Schematic</h2>
   <p>
-    To satisfy the working model demonstration requirement, a tabletop miniature physical diorama was constructed:
+    To satisfy the working model demonstration requirement, a tabletop miniature physical diorama was constructed with the complete electrical circuit schematic depicted below:
   </p>
+  <div style="text-align: center; margin: 8px 0; page-break-inside: avoid;">
+    <img src="circuit_diagram.svg" style="width: 100%; max-height: 280px; border-radius: 6px; border: 1px solid #cbd5e1;" alt="Complete Circuit Schematic">
+  </div>
   <ul>
-    <li><b>TowerPro SG90 Micro Servos (2x):</b> Actuate barrier arms across the two-lane roadway (90° ↔ 0°).</li>
-    <li><b>LM393 Infrared Proximity Sensors (4x):</b> Track Entry, Track Occupancy, Track Departure, and Roadway Obstacle sensors.</li>
-    <li><b>Traffic & Warning Cluster:</b> 5mm Red, Yellow, Green LEDs, crossbuck red wig-wags, and 5V active piezo buzzer.</li>
-    <li><b>Controller Interfacing:</b> Digital pins mapped directly to the Verilog controller states with shared common ground.</li>
+    <li><b>TowerPro SG90 Micro Servos (2x):</b> Actuate barrier arms across the two-lane roadway (90° ↔ 0°). Powered by dedicated external 5V 2A DC supply with shared common ground.</li>
+    <li><b>LM393 Infrared Proximity Sensors (4x):</b> Track Entry (D2), Track Occupancy (D3), Track Departure (D7), and Roadway Obstacle (A1).</li>
+    <li><b>Traffic & Warning Cluster:</b> Road Signals (D4 Red, D5 Yellow, D6 Green via 220Ω), Crossbuck Wig-Wags (D12, D13), Track Signals (A2 Green, A3 Red), and 5V active piezo buzzer (D8).</li>
+    <li><b>Failsafe Grounding:</b> Microcontroller GND and Servo Power Supply GND tied into a unified common ground rail.</li>
   </ul>
 
   <h2 class="section-title">8. Conclusion & Future Scope</h2>
