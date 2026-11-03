@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hardware Wiring &amp; Circuit Schematic Manual - Railway Level Crossing Controller</title>
+<style>
+  @page {
+    size: A4;
+    margin: 12mm 13mm 12mm 13mm;
+    @bottom-right {
+      content: "Page " counter(page) " of 4";
+      font-size: 8pt;
+      font-family: 'Liberation Sans', Arial, sans-serif;
+      color: #64748b;
+      font-weight: bold;
+    }
+    @bottom-left {
+      content: "GM University Davanagere | Dept of ECE | UE25EC2302: Hardware Modelling using Verilog";
+      font-size: 7.5pt;
+      font-family: 'Liberation Sans', Arial, sans-serif;
+      color: #64748b;
+      font-weight: 500;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Liberation Serif', Georgia, 'Times New Roman', serif;
+    font-size: 8.5pt;
+    line-height: 1.35;
+    color: #0f172a;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, th, .sans {
+    font-family: 'Liberation Sans', 'Helvetica Neue', Arial, sans-serif;
+    color: #0f172a;
+    page-break-after: avoid;
+  }
+
+  .header-card {
+    border: 2px solid #1e3a8a;
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+    border-radius: 5px;
+    padding: 6px 12px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .doc-title {
+    font-size: 13.5pt;
+    font-weight: 800;
+    color: #1e3a8a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 2px 0;
+  }
+
+  .doc-subtitle {
+    font-size: 8pt;
+    color: #475569;
+    font-family: 'Liberation Sans', Arial, sans-serif;
+    font-weight: 600;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  h2.section-head {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    border-bottom: 1.2px solid #cbd5e1;
+    padding-bottom: 2px;
+    margin-top: 6px;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  h3.sub-head {
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #334155;
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+
+  p {
+    margin: 0 0 4px 0;
+    text-align: justify;
+  }
+
+  ul, ol {
+    margin: 0 0 4px 0;
+    padding-left: 16px;
+  }
+
+  li {
+    margin-bottom: 1px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3px 0 5px 0;
+    font-size: 7.2pt;
+    font-family: 'Liberation Sans', Arial, sans-serif;
+    page-break-inside: avoid;
+  }
+
+  tr, td, th {
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 2.2px 4.5px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  th {
+    background-color: #f1f5f9;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+
+  .callout-box {
+    background-color: #f8fafc;
+    border-left: 3px solid #1e3a8a;
+    padding: 3px 6px;
+    margin: 4px 0;
+    border-radius: 0 3px 3px 0;
+    font-size: 7.5pt;
+    font-family: 'Liberation Sans', Arial, sans-serif;
+    page-break-inside: avoid;
+  }
+
+  .code-block {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 5px 7px;
+    border-radius: 4px;
+    font-family: 'Liberation Mono', 'Courier New', monospace;
+    font-size: 6.5pt;
+    line-height: 1.2;
+    margin: 3px 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+    page-break-inside: avoid;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 1: HEADER, TEAM, POWER SUPPLY & COMPLETE PINOUT NETLIST MATRIX   -->
+  <!-- ===================================================================== -->
+  <div class="header-card">
+    <div>
+      <div style="font-size: 7pt; font-weight: 700; color: #64748b; font-family: 'Liberation Sans', sans-serif; letter-spacing: 0.8px;">
+        GM UNIVERSITY DAVANAGERE | DEPARTMENT OF ELECTRONICS &amp; COMMUNICATION ENGINEERING
+      </div>
+      <h1 class="doc-title">Hardware Wiring &amp; Circuit Interconnect Manual</h1>
+      <div class="doc-subtitle">
+        Course: <b>UE25EC2302</b> (Hardware Modelling using Verilog) &nbsp;|&nbsp; Project: <b>Railway Level Crossing Controller</b>
+      </div>
+    </div>
+    <div style="text-align: right; font-family: 'Liberation Sans', sans-serif; font-size: 7.5pt; color: #334155;">
+      <b>Semester:</b> 3 &nbsp;|&nbsp; <b>Marks:</b> 40 PBL<br>
+      <span style="display: inline-block; padding: 2px 5px; background: #1e3a8a; color: #ffffff; font-weight: bold; border-radius: 3px; margin-top: 2px;">
+        HARDWARE BENCH SPECIFICATION
+      </span>
+    </div>
+  </div>
+
+  <!-- Compact Student Team Ribbon -->
+  <div style="display: flex; justify-content: space-between; background: #ffffff; border: 1px solid #cbd5e1; padding: 3px 8px; border-radius: 4px; font-size: 7.2pt; font-family: 'Liberation Sans', sans-serif; margin-bottom: 5px;">
+    <div><b>Vikas K S (Lead):</b> <code>U26E02EC521</code> (Arch/FSM)</div>
+    <div><b>Nandan S L:</b> <code>U26E02EC518</code> (Safety Interlock)</div>
+    <div><b>Meghana P:</b> <code>U25E02EC070</code> (Traffic/Actuators)</div>
+    <div><b>Keerthana R F:</b> <code>U25E02EC053</code> (Verification/Synth)</div>
+  </div>
+
+  <h2 class="section-head" style="margin-top: 2px;">1. Power Distribution Network &amp; Decoupling Architecture</h2>
+  <div class="callout-box" style="border-left-color: #eab308; background-color: #fefce8; padding: 3px 6px;">
+    <b>CRITICAL HARDWARE RULE (COMMON GROUND &amp; BROWNOUT PREVENT):</b> The two SG90 barrier servos draw up to <b>1.6A peak current</b> during initial rotational acceleration. They must be powered from a dedicated <b>External 5.0V 2.0A DC Power Supply</b>. The Ground (GND) of the external supply and the Arduino/FPGA GND <b>MUST BE TIED TOGETHER (COMMON GROUND)</b>. A <b>470 µF electrolytic bulk capacitor</b> in parallel with a <b>0.1 µF ceramic bypass disc</b> across the motor rail suppresses inductive voltage droops.
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 17%;">Power Rail</th>
+        <th style="width: 23%;">Voltage &amp; Source</th>
+        <th style="width: 14%;">Current Cap</th>
+        <th style="width: 21%;">Filter Network</th>
+        <th style="width: 25%;">Connected Load Subsystems</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Logic VCC (+5V)</b></td>
+        <td>+5.0V DC (USB / 7805 Reg)</td>
+        <td>200 mA max</td>
+        <td>0.1 µF Ceramic on VCC</td>
+        <td>ATmega328P, 4x LM393 IR Sensors, Buttons</td>
+      </tr>
+      <tr>
+        <td><b>Motor VCC (+5V_EXT)</b></td>
+        <td>+5.0V DC (External Adapter)</td>
+        <td>2000 mA (2.0A)</td>
+        <td><b>470 µF / 16V</b> ∥ <b>0.1 µF / 50V</b></td>
+        <td>TowerPro SG90 Servos (North &amp; South)</td>
+      </tr>
+      <tr>
+        <td><b>Common GND (0V)</b></td>
+        <td>Common Star Return Rail</td>
+        <td>Return Path (0V)</td>
+        <td>Single Low-Z Ground Bus</td>
+        <td>MCU GND, Ext Supply GND, All LED Cathodes</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="section-head">2. Master Pin-to-Pin Interconnect &amp; Netlist Matrix</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 4%; text-align: center;">Sl.</th>
+        <th style="width: 21%;">Component Name</th>
+        <th style="width: 15%;">Device Terminal</th>
+        <th style="width: 14%;">Arduino Uno Pin</th>
+        <th style="width: 13%;">Basys 3 FPGA</th>
+        <th style="width: 14%;">Series Element</th>
+        <th style="width: 19%;">Signal Net &amp; Function</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center;">1</td>
+        <td><b>Entry Sensor (S1)</b></td>
+        <td>Digital OUT (Pin 3)</td>
+        <td><b>Pin D2 (INT0)</b></td>
+        <td><code>V17</code> (SW0)</td>
+        <td>Internal Pull-up</td>
+        <td><code>sensor_inbound</code> (Active-LOW)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">2</td>
+        <td><b>Track Occupancy (S2)</b></td>
+        <td>Digital OUT (Pin 3)</td>
+        <td><b>Pin D3 (INT1)</b></td>
+        <td><code>V16</code> (SW1)</td>
+        <td>Internal Pull-up</td>
+        <td><code>track_occupied</code> (Active-LOW)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">3</td>
+        <td><b>Exit Sensor (S3)</b></td>
+        <td>Digital OUT (Pin 3)</td>
+        <td><b>Pin D7</b></td>
+        <td><code>W16</code> (SW2)</td>
+        <td>Internal Pull-up</td>
+        <td><code>sensor_outbound</code> (Active-LOW)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">4</td>
+        <td><b>Obstacle Sensor (S4)</b></td>
+        <td>Digital OUT (Pin 3)</td>
+        <td><b>Pin A1</b></td>
+        <td><code>W17</code> (SW3)</td>
+        <td>Internal Pull-up</td>
+        <td><code>obstacle_detected</code> (Emergency)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">5</td>
+        <td><b>Manual Emergency Btn</b></td>
+        <td>NO Terminal 2</td>
+        <td><b>Pin A0</b></td>
+        <td><code>U18</code> (BtnC)</td>
+        <td><b>10 kΩ Pull-Down</b></td>
+        <td><code>emergency_btn</code> (Active-HIGH)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">6</td>
+        <td><b>Gate Tamper Button</b></td>
+        <td>NO Terminal 2</td>
+        <td><b>Pin A4</b></td>
+        <td><code>T18</code> (BtnU)</td>
+        <td><b>10 kΩ Pull-Down</b></td>
+        <td><code>tamper_test</code> (Interlock verify)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">7</td>
+        <td><b>North Barrier Servo</b></td>
+        <td>Orange Lead (PWM)</td>
+        <td><b>Pin D9 (PWM)</b></td>
+        <td><code>JB1 (J1)</code></td>
+        <td>Direct PWM</td>
+        <td><code>servo_north_pwm</code> (50 Hz pulse)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">8</td>
+        <td><b>South Barrier Servo</b></td>
+        <td>Orange Lead (PWM)</td>
+        <td><b>Pin D10 (PWM)</b></td>
+        <td><code>JB2 (L2)</code></td>
+        <td>Direct PWM</td>
+        <td><code>servo_south_pwm</code> (50 Hz pulse)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">9</td>
+        <td><b>Road RED Light (Stop)</b></td>
+        <td>Anode (+) Lead</td>
+        <td><b>Pin D4</b></td>
+        <td><code>U16</code> (LD0)</td>
+        <td><b>220 Ω, 1/4W (R1)</b></td>
+        <td><code>road_red</code> (Halt road traffic)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">10</td>
+        <td><b>Road YELLOW (Warn)</b></td>
+        <td>Anode (+) Lead</td>
+        <td><b>Pin D5 (PWM)</b></td>
+        <td><code>E19</code> (LD1)</td>
+        <td><b>220 Ω, 1/4W (R2)</b></td>
+        <td><code>road_yellow</code> (Pre-closure warning)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">11</td>
+        <td><b>Road GREEN (Go)</b></td>
+        <td>Anode (+) Lead</td>
+        <td><b>Pin D6 (PWM)</b></td>
+        <td><code>U19</code> (LD2)</td>
+        <td><b>220 Ω, 1/4W (R3)</b></td>
+        <td><code>road_green</code> (Safe 90° open)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">12</td>
+        <td><b>Pedestrian WALK</b></td>
+        <td>Anode (+) Lead</td>
+        <td><b>Pin D11</b></td>
+        <td><code>V19</code> (LD3)</td>
+        <td><b>220 Ω, 1/4W (R8)</b></td>
+        <td><code>ped_walk_green</code> (Pedestrian cross)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">13</td>
+        <td><b>Pedestrian DON'T WALK</b></td>
+        <td>Anode (+) Lead</td>
+        <td><b>Pin A5</b></td>
+        <td><code>U15</code> (LD5)</td>
+        <td><b>220 Ω, 1/4W (R9)</b></td>
+        <td><code>ped_stop_red</code> (Pedestrian halt)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">14</td>
+        <td><b>Crossbuck Flasher L</b></td>
+        <td>Anodes (x2 LEDs)</td>
+        <td><b>Pin D12</b></td>
+        <td><code>W18</code> (LD4)</td>
+        <td><b>220 Ω, 1/4W (R4)</b></td>
+        <td><code>crossbuck_l</code> (1.25 Hz Wig-Wag)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">15</td>
+        <td><b>Crossbuck Flasher R</b></td>
+        <td>Anodes (x2 LEDs)</td>
+        <td><b>Pin D13</b></td>
+        <td><code>U14</code> (LD6)</td>
+        <td><b>220 Ω, 1/4W (R5)</b></td>
+        <td><code>crossbuck_r</code> (180° Inverted phase)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">16</td>
+        <td><b>Train GREEN Aspect</b></td>
+        <td>Anode (+) Lead</td>
+        <td><b>Pin A2</b></td>
+        <td><code>V14</code> (LD7)</td>
+        <td><b>220 Ω, 1/4W (R6)</b></td>
+        <td><code>train_green</code> (Gate = 0° safe)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">17</td>
+        <td><b>Train RED Aspect</b></td>
+        <td>Anode (+) Lead</td>
+        <td><b>Pin A3</b></td>
+        <td><code>V13</code> (LD8)</td>
+        <td><b>220 Ω, 1/4W (R7)</b></td>
+        <td><code>train_red</code> (Gate open / obstacle)</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">18</td>
+        <td><b>Active Piezo Buzzer</b></td>
+        <td>Positive (+) Pin</td>
+        <td><b>Pin D8</b></td>
+        <td><code>W19</code> (PMOD)</td>
+        <td>Direct Drive</td>
+        <td><code>buzzer_pwm</code> (1.8kHz/2.8kHz tone)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 2: FULL MASTER CIRCUIT DIAGRAM SCHEMATIC & SUBSYSTEM DETAILS     -->
+  <!-- ===================================================================== -->
+  <div class="page-break"></div>
+
+  <h2 class="section-head" style="margin-top: 0;">3. Master Electrical Wiring &amp; Interconnect Schematic</h2>
+  <p style="font-size: 8pt; margin-bottom: 3px;">
+    The complete system interconnect schematic illustrates all sensor conditioning inputs, servo PWM drives, current-limited signal masts, audible transducer, emergency switches, and decoupling filter network:
+  </p>
+
+  <div style="text-align: center; margin: 3px 0 6px 0; border: 1px solid #cbd5e1; border-radius: 5px; padding: 3px; background: #070d1e;">
+    <img src="report_circuit_diagram.svg" style="width: 100%; max-height: 235px; display: block;" alt="Complete Circuit Wiring Schematic">
+  </div>
+
+  <h2 class="section-head">4. Subsystem Electrical Schematics &amp; Interface Calculations</h2>
+  
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+    <!-- Subsystem A -->
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px 6px; background: #ffffff;">
+      <h3 class="sub-head" style="margin-top: 0; color: #1e3a8a;">A. Track Proximity Sensors (4x LM393)</h3>
+      <p style="font-size: 7.5pt; margin-bottom: 2px;">
+        <b>Principle:</b> 940 nm GaAs emitter + phototransistor. On-board LM393 comparator gives clean active-LOW digital logic.
+      </p>
+      <ul style="font-size: 7.2pt; padding-left: 12px; margin-bottom: 0;">
+        <li><b>VCC / GND:</b> Connected to +5V Logic Rail and Common GND.</li>
+        <li><b>D0 Digital Output:</b> Pulls to <b>0.0V (LOW)</b> on train detection; sits at <b>5.0V (HIGH)</b> in clear quiescent state.</li>
+        <li><b>Range Tuning:</b> Rotate 10kΩ trimpot clockwise to increase distance (ideal: 3 cm to 5 cm from track centerline).</li>
+      </ul>
+    </div>
+
+    <!-- Subsystem B -->
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px 6px; background: #ffffff;">
+      <h3 class="sub-head" style="margin-top: 0; color: #c2410c;">B. Barrier Servos (2x TowerPro SG90)</h3>
+      <p style="font-size: 7.5pt; margin-bottom: 2px;">
+        <b>Principle:</b> 50 Hz PWM positional control (Period T = 20.0 ms). Pulse width dictates rotational angle.
+      </p>
+      <ul style="font-size: 7.2pt; padding-left: 12px; margin-bottom: 0;">
+        <li><b>Vertical Position (Open 90°):</b> 2.0 ms high pulse (50 Hz frame).</li>
+        <li><b>Horizontal Position (Closed 0°):</b> 1.0 ms high pulse (50 Hz frame).</li>
+        <li><b>Power Rail:</b> Red wire to External 5V 2A; Brown wire to GND.</li>
+        <li><b>Ramp Rate:</b> ±1° step every 27.7 ms eliminates gear stress.</li>
+      </ul>
+    </div>
+
+    <!-- Subsystem C -->
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px 6px; background: #ffffff;">
+      <h3 class="sub-head" style="margin-top: 0; color: #15803d;">C. Traffic &amp; Aspect LEDs (Current-Limiting)</h3>
+      <p style="font-size: 7.5pt; margin-bottom: 2px;">
+        <b>Ohm's Law Calculation:</b>
+        R = (V_CC - V_F) / I_F = (5.0V - 2.0V) / 0.015A = 200 &Omega; &rarr; <b>220 &Omega; &plusmn;5%, 1/4W</b>
+      </p>
+      <ul style="font-size: 7.2pt; padding-left: 12px; margin-bottom: 0;">
+        <li><b>Resistor Rating:</b> 220 &Omega;, 1/4W Metal Film (Red-Red-Brown-Gold).</li>
+        <li><b>Safe Current:</b> I_F = 13.6 mA per pin (well within 20mA limit).</li>
+        <li><b>Wiring:</b> Resistor in series with Anode (+); Cathodes (-) to GND.</li>
+      </ul>
+    </div>
+
+    <!-- Subsystem D -->
+    <div style="border: 1px solid #cbd5e1; border-radius: 4px; padding: 4px 6px; background: #ffffff;">
+      <h3 class="sub-head" style="margin-top: 0; color: #b91c1c;">D. Push Buttons &amp; Audible Buzzer</h3>
+      <p style="font-size: 7.5pt; margin-bottom: 2px;">
+        <b>Pull-Down Resistor Calculation:</b>
+        I_closed = 5.0V / 10 k&Omega; = 0.5 mA (Negligible power loss)
+      </p>
+      <ul style="font-size: 7.2pt; padding-left: 12px; margin-bottom: 0;">
+        <li><b>Resistor:</b> 10 k&Omega;, 1/4W (Brown-Black-Orange-Gold) ties pin to 0.0V.</li>
+        <li><b>Action:</b> Pressing button injects solid 5.0V pulse without floating.</li>
+        <li><b>Active Buzzer:</b> Pin D8 (+) to GND (-); 1.8kHz chime / 2.8kHz siren.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 3: BENCH ASSEMBLY, CALIBRATION & TESTING CHECKLIST               -->
+  <!-- ===================================================================== -->
+  <div class="page-break"></div>
+
+  <h2 class="section-head" style="margin-top: 0;">5. Bench Assembly &amp; Diorama Construction Procedure</h2>
+
+  <h3 class="sub-head">Step 1: Breadboard Power Bus Configuration</h3>
+  <ol style="font-size: 7.5pt;">
+    <li>Place the 830-point breadboard horizontally on your workbench. Connect the upper red power rail to the <b>External 5V 2A DC Supply (+)</b> and upper blue rail to <b>External GND (-)</b>.</li>
+    <li>Connect the lower red rail to the <b>Arduino +5V pin</b> and lower blue rail to the <b>Arduino GND pin</b>.</li>
+    <li><b>TIE COMMON GROUND:</b> Insert a heavy jumper wire connecting the upper blue rail to the lower blue rail. Both power supplies now share the same 0.0V reference potential.</li>
+    <li>Insert the <b>470 µF electrolytic capacitor</b> across the upper rail (Long lead = +5V, Stripe lead = GND). Insert the <b>0.1 µF ceramic disc capacitor (104)</b> in parallel.</li>
+  </ol>
+
+  <h3 class="sub-head">Step 2: Track Sensor Alignment &amp; Potentiometer Calibration</h3>
+  <ol style="font-size: 7.5pt;">
+    <li>Mount <b>Sensor 1 (Entry)</b> 20 cm before the crossing on the left side of the track. Angle the IR transmitter/receiver towards the rail track at $45^\circ$.</li>
+    <li>Mount <b>Sensor 2 (Occupancy)</b> directly in the center of the level crossing diamond facing across the rails.</li>
+    <li>Mount <b>Sensor 3 (Exit)</b> 20 cm past the crossing on the departure side.</li>
+    <li>Mount <b>Sensor 4 (Obstacle)</b> facing the roadway intersection to detect stalled vehicles.</li>
+    <li><b>Calibration Routine:</b> Power up the system. Place a toy train or wagon on the track in front of Sensor 1. Using a precision screwdriver, turn the onboard brass trimpot until the green D0 indicator LED on the sensor module lights up. Move the train away: the LED must turn off immediately. Repeat for Sensors 2, 3, and 4.</li>
+  </ol>
+
+  <h3 class="sub-head">Step 3: Motorized Barrier Horn Mechanical Zeroing</h3>
+  <ol style="font-size: 7.5pt;">
+    <li>Connect Servo 1 signal to Pin D9 and Servo 2 signal to Pin D10.</li>
+    <li>Power on the Arduino with the companion driver sketch. The firmware automatically sends a $90^\circ$ (vertical) command to both servos upon boot.</li>
+    <li>Press the single-arm servo horn onto the servo spline such that the barrier arm stands <b>vertically upright at exactly $90^\circ$</b>. Tighten the central horn screw.</li>
+    <li>Trigger Sensor 1: verify that both barrier arms rotate downward smoothly without grinding or stalling until they rest <b>horizontally across the roadway at $0^\circ$</b>.</li>
+  </ol>
+
+  <h2 class="section-head">6. Hardware Troubleshooting &amp; Diagnostic Matrix</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">Observed Symptom</th>
+        <th style="width: 25%;">Probable Root Cause</th>
+        <th style="width: 30%;">Bench Measurement / Check</th>
+        <th style="width: 25%;">Corrective Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>Servo Jitter / Board Reset</b></td>
+        <td>Current brownout from Arduino 5V regulator</td>
+        <td>Measure 5V rail with multimeter during motor sweep (drops below 4.2V)</td>
+        <td>Power servos from external 5V 2A supply with 470µF bulk capacitor</td>
+      </tr>
+      <tr>
+        <td><b>Erratic / Uncontrolled Servo Motion</b></td>
+        <td>Missing Common Ground connection</td>
+        <td>Measure DC voltage between Arduino GND and Power Adapter GND</td>
+        <td>Connect jumper wire between Arduino GND and external supply GND</td>
+      </tr>
+      <tr>
+        <td><b>IR Sensor Always ON (D0=0V)</b></td>
+        <td>Ambient sunlight or trimmer sensitivity too high</td>
+        <td>Observe module status LED under ambient lighting</td>
+        <td>Turn potentiometer counter-clockwise to reduce optical threshold</td>
+      </tr>
+      <tr>
+        <td><b>Emergency Button Trips Spontaneously</b></td>
+        <td>Floating CMOS input (missing pull-down)</td>
+        <td>Measure voltage on Pin A0 when button is unpressed (floats at ~1.8V)</td>
+        <td>Add 10 kΩ pull-down resistor from Pin A0 to Common GND</td>
+      </tr>
+      <tr>
+        <td><b>Dim / Non-illuminating LEDs</b></td>
+        <td>Reversed LED polarity or incorrect resistor</td>
+        <td>Check long lead (Anode +) vs flat edge (Cathode -)</td>
+        <td>Verify 220 Ω resistor value (Red-Red-Brown); reverse LED orientation</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ===================================================================== -->
+  <!-- PAGE 4: ARDUINO COMPANION FIRMWARE & VERIFICATION CHECKLIST           -->
+  <!-- ===================================================================== -->
+  <div class="page-break"></div>
+
+  <h2 class="section-head" style="margin-top: 0;">7. Companion Arduino Hardware Driver Sketch (Matching Verilog RTL FSM)</h2>
+  <p style="font-size: 7.5pt; margin-bottom: 2px;">
+    Replicates the exact 4-state Moore FSM and hardware safety interlocking modeled in course <b>UE25EC2302</b>:
+  </p>
+
+  <div class="code-block">
+#include &lt;Servo.h&gt;
+const int PIN_S1 = 2, PIN_S2 = 3, PIN_RED = 4, PIN_YEL = 5, PIN_GRN = 6, PIN_S3 = 7, PIN_BUZZ = 8;
+const int PIN_SRV_N = 9, PIN_SRV_S = 10, PIN_PED_W = 11, PIN_CR_L = 12, PIN_CR_R = 13;
+const int PIN_EMG = A0, PIN_OBST = A1, PIN_TRN_G = A2, PIN_TRN_R = A3, PIN_PED_S = A5;
+
+enum FSMState { ST_OPEN = 0, ST_CLOSING = 1, ST_CLOSED = 2, ST_OPENING = 3 };
+FSMState state = ST_OPEN;
+Servo srvN, srvS;
+int angle = 90;
+
+void setup() {
+  pinMode(PIN_S1, INPUT); pinMode(PIN_S2, INPUT); pinMode(PIN_S3, INPUT); pinMode(PIN_OBST, INPUT); pinMode(PIN_EMG, INPUT);
+  pinMode(PIN_RED, OUTPUT); pinMode(PIN_YEL, OUTPUT); pinMode(PIN_GRN, OUTPUT); pinMode(PIN_BUZZ, OUTPUT);
+  pinMode(PIN_PED_W, OUTPUT); pinMode(PIN_PED_S, OUTPUT); pinMode(PIN_CR_L, OUTPUT); pinMode(PIN_CR_R, OUTPUT);
+  pinMode(PIN_TRN_G, OUTPUT); pinMode(PIN_TRN_R, OUTPUT);
+  srvN.attach(PIN_SRV_N); srvS.attach(PIN_SRV_S);
+  srvN.write(90); srvS.write(90);
+}
+
+void loop() {
+  bool inb = (digitalRead(PIN_S1) == LOW), occ = (digitalRead(PIN_S2) == LOW);
+  bool out = (digitalRead(PIN_S3) == LOW), obs = (digitalRead(PIN_S4) == LOW);
+  bool emg = (digitalRead(PIN_EMG) == HIGH), hazard = (inb || occ || obs || emg);
+
+  switch (state) {
+    case ST_OPEN:    if (hazard) state = ST_CLOSING; break;
+    case ST_CLOSING: if (angle &gt; 0) { angle--; delay(25); } else state = ST_CLOSED; break;
+    case ST_CLOSED:  if (!hazard &amp;&amp; out) state = ST_OPENING; break;
+    case ST_OPENING: if (hazard) state = ST_CLOSING; else if (angle &lt; 90) { angle++; delay(25); } else state = ST_OPEN; break;
+  }
+  srvN.write(angle); srvS.write(angle);
+
+  digitalWrite(PIN_GRN, (state == ST_OPEN &amp;&amp; !hazard));
+  digitalWrite(PIN_YEL, (state == ST_CLOSING));
+  digitalWrite(PIN_RED, (state == ST_CLOSED || state == ST_CLOSING || hazard));
+  digitalWrite(PIN_TRN_G, (state == ST_CLOSED &amp;&amp; angle == 0 &amp;&amp; !obs &amp;&amp; !emg));
+  digitalWrite(PIN_TRN_R, !(state == ST_CLOSED &amp;&amp; angle == 0 &amp;&amp; !obs &amp;&amp; !emg));
+  digitalWrite(PIN_PED_W, (state == ST_OPEN &amp;&amp; !hazard));
+  digitalWrite(PIN_PED_S, !(state == ST_OPEN &amp;&amp; !hazard));
+
+  if (state == ST_CLOSING || state == ST_CLOSED || hazard) {
+    bool blink = (millis() / 400) % 2;
+    digitalWrite(PIN_CR_L, blink); digitalWrite(PIN_CR_R, !blink);
+    digitalWrite(PIN_BUZZ, (obs || emg) ? HIGH : blink);
+  } else {
+    digitalWrite(PIN_CR_L, LOW); digitalWrite(PIN_CR_R, LOW); digitalWrite(PIN_BUZZ, LOW);
+  }
+}
+  </div>
+
+  <h2 class="section-head">8. Demonstration Protocol for Evaluation (40 Marks PBL)</h2>
+  <div style="font-size: 7.5pt; font-family: 'Liberation Sans', sans-serif;">
+    <ol style="margin-bottom: 0; padding-left: 14px;">
+      <li><b>Baseline Safe Check:</b> Power ON. Road Green ON, Pedestrian Walk ON, Barrier at 90&deg; upright, Train Signal RED.</li>
+      <li><b>Train Arrival Demonstration:</b> Slide toy train past Sensor 1. Observe Road Yellow ON, Buzzer chimes, Crossbuck flashers alternate (1.25 Hz), Barrier descends smoothly from 90&deg; to 0&deg;.</li>
+      <li><b>Interlock Lock Confirmation:</b> When barrier reaches 0&deg;, observe Train Aspect switch to <b>GREEN (PROCEED)</b>.</li>
+      <li><b>Departure Clearance:</b> Move train past Sensor 3. 5-second buffer passes, barrier smoothly rises back to 90&deg;, Road Green restored.</li>
+      <li><b>Emergency Obstacle Injection:</b> Place car on tracks during green signal. Sensor 4 immediately trips Train Signal RED and activates continuous emergency siren.</li>
+    </ol>
+  </div>
+
+  <div style="margin-top: 10px; text-align: center; font-size: 7.2pt; color: #64748b; font-family: 'Liberation Sans', sans-serif; border-top: 1px solid #cbd5e1; padding-top: 3px;">
+    — End of Official Hardware Wiring &amp; Circuit Interconnect Manual (UE25EC2302) —
+  </div>
+
+</body>
+</html>
