@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 620" width="100%" height="100%" style="background-color: #0b1120; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <pattern id="r-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#172554" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#070d1e"/>
+  <rect width="100%" height="100%" fill="url(#r-grid)"/>
+
+  <!-- Top Title Banner -->
+  <rect x="20" y="12" width="1460" height="42" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5"/>
+  <text x="35" y="38" fill="#38bdf8" font-size="16" font-weight="bold" letter-spacing="0.5">COMPLETE HARDWARE WIRING SCHEMATIC &amp; INTERCONNECT ARCHITECTURE</text>
+  <text x="1460" y="38" fill="#94a3b8" font-size="11" text-anchor="end">UE25EC2302: Hardware Modelling using Verilog | GM University</text>
+
+  <!-- ========================================================================= -->
+  <!-- 1. LEFT COLUMN: TRACK SENSORS & SERVOS                                    -->
+  <!-- ========================================================================= -->
+  <!-- SENSORS BLOCK -->
+  <g transform="translate(20, 64)">
+    <rect width="380" height="275" rx="6" fill="#0f172a" stroke="#3b82f6" stroke-width="1.5"/>
+    <rect width="380" height="26" rx="6" fill="#1e3a8a"/>
+    <text x="15" y="18" fill="#ffffff" font-size="11" font-weight="bold">[SENSORS] TRACK SENSORS (4x LM393 IR COMPARATORS)</text>
+
+    <!-- S1 -->
+    <g transform="translate(12, 36)">
+      <rect width="356" height="52" rx="4" fill="#1e293b" stroke="#334155"/>
+      <text x="10" y="18" fill="#60a5fa" font-size="10" font-weight="bold">S1: INBOUND ENTRY SENSOR (Track S1)</text>
+      <text x="10" y="34" fill="#94a3b8" font-size="9">VCC ➔ +5V | GND ➔ Common GND | OUT ➔ <tspan fill="#4ade80" font-weight="bold">Pin D2</tspan> (INT0)</text>
+      <text x="10" y="46" fill="#38bdf8" font-size="8.5">Detects approaching train 20cm ahead; asserts req_close</text>
+    </g>
+
+    <!-- S2 -->
+    <g transform="translate(12, 95)">
+      <rect width="356" height="52" rx="4" fill="#1e293b" stroke="#334155"/>
+      <text x="10" y="18" fill="#60a5fa" font-size="10" font-weight="bold">S2: TRACK OCCUPANCY SENSOR (Track S2)</text>
+      <text x="10" y="34" fill="#94a3b8" font-size="9">VCC ➔ +5V | GND ➔ Common GND | OUT ➔ <tspan fill="#4ade80" font-weight="bold">Pin D3</tspan> (INT1)</text>
+      <text x="10" y="46" fill="#38bdf8" font-size="8.5">Mounted inside crossing; directly latches gate interlock</text>
+    </g>
+
+    <!-- S3 -->
+    <g transform="translate(12, 154)">
+      <rect width="356" height="52" rx="4" fill="#1e293b" stroke="#334155"/>
+      <text x="10" y="18" fill="#60a5fa" font-size="10" font-weight="bold">S3: OUTBOUND EXIT SENSOR (Track S3)</text>
+      <text x="10" y="34" fill="#94a3b8" font-size="9">VCC ➔ +5V | GND ➔ Common GND | OUT ➔ <tspan fill="#4ade80" font-weight="bold">Pin D7</tspan></text>
+      <text x="10" y="46" fill="#38bdf8" font-size="8.5">Mounted 20cm past crossing; starts 5s safe departure timer</text>
+    </g>
+
+    <!-- S4 -->
+    <g transform="translate(12, 213)">
+      <rect width="356" height="52" rx="4" fill="#1e293b" stroke="#f43f5e"/>
+      <text x="10" y="18" fill="#fb7185" font-size="10" font-weight="bold">S4: ROADWAY OBSTACLE SENSOR (Stalled Vehicle)</text>
+      <text x="10" y="34" fill="#94a3b8" font-size="9">VCC ➔ +5V | GND ➔ Common GND | OUT ➔ <tspan fill="#f43f5e" font-weight="bold">Pin A1</tspan></text>
+      <text x="10" y="46" fill="#fca5a5" font-size="8.5">Instant emergency halt: Train signal RED + Audio siren</text>
+    </g>
+  </g>
+
+  <!-- SERVOS BLOCK -->
+  <g transform="translate(20, 350)">
+    <rect width="380" height="155" rx="6" fill="#0f172a" stroke="#f97316" stroke-width="1.5"/>
+    <rect width="380" height="26" rx="6" fill="#9a3412"/>
+    <text x="15" y="18" fill="#ffffff" font-size="11" font-weight="bold">[ACTUATORS] GATE ACTUATORS (2x SG90 MICRO SERVOS)</text>
+
+    <!-- Servo 1 -->
+    <g transform="translate(12, 34)">
+      <rect width="356" height="52" rx="4" fill="#1e293b" stroke="#f97316"/>
+      <text x="10" y="18" fill="#fb923c" font-size="10" font-weight="bold">SERVO 1: NORTH BARRIER (90 deg Open to 0 deg Closed)</text>
+      <text x="10" y="33" fill="#f87171" font-size="9">Red: Ext +5V Rail | Brown: Common GND</text>
+      <text x="10" y="46" fill="#f97316" font-size="9" font-weight="bold">Orange PWM Wire ➔ Controller Pin D9 [Basys 3: JB1]</text>
+    </g>
+
+    <!-- Servo 2 -->
+    <g transform="translate(12, 93)">
+      <rect width="356" height="52" rx="4" fill="#1e293b" stroke="#f97316"/>
+      <text x="10" y="18" fill="#fb923c" font-size="10" font-weight="bold">SERVO 2: SOUTH BARRIER (90 deg Open to 0 deg Closed)</text>
+      <text x="10" y="33" fill="#f87171" font-size="9">Red: Ext +5V Rail | Brown: Common GND</text>
+      <text x="10" y="46" fill="#f97316" font-size="9" font-weight="bold">Orange PWM Wire ➔ Controller Pin D10 [Basys 3: JB2]</text>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 2. CENTER COLUMN: CONTROLLER BOARD                                        -->
+  <!-- ========================================================================= -->
+  <g transform="translate(420, 64)">
+    <rect width="470" height="440" rx="8" fill="#0369a1" stroke="#38bdf8" stroke-width="2"/>
+    <rect x="8" y="8" width="454" height="424" rx="6" fill="#0284c7"/>
+
+    <text x="235" y="32" fill="#ffffff" font-size="14" font-weight="bold" text-anchor="middle">CENTRAL CONTROLLER BOARD</text>
+    <text x="235" y="48" fill="#bae6fd" font-size="10" text-anchor="middle">Arduino Uno R3 (ATmega328P @ 16 MHz) / Digilent Basys 3 FPGA</text>
+
+    <!-- Microcontroller Chip Drawing -->
+    <rect x="165" y="160" width="140" height="150" rx="4" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+    <text x="235" y="225" fill="#38bdf8" font-size="13" font-weight="bold" text-anchor="middle">ATmega328P</text>
+    <text x="235" y="244" fill="#94a3b8" font-size="10" text-anchor="middle">32KB Flash | 2KB RAM</text>
+    <text x="235" y="262" fill="#cbd5e1" font-size="9" text-anchor="middle">Verilog FSM Co-Processor</text>
+
+    <!-- Digital Header Left -->
+    <g transform="translate(18, 68)">
+      <text x="0" y="0" fill="#fde047" font-size="10" font-weight="bold">DIGITAL I/O &amp; PWM</text>
+      <text x="0" y="20" fill="#ffffff" font-size="9"><b>D2:</b> &lt;&#8212; S1 Entry [V17]</text>
+      <text x="0" y="38" fill="#ffffff" font-size="9"><b>D3:</b> &lt;&#8212; S2 Occupancy [V16]</text>
+      <text x="0" y="56" fill="#fca5a5" font-size="9"><b>D4:</b> &#8212;&gt; Road RED (220&#937;) [U16]</text>
+      <text x="0" y="74" fill="#fde047" font-size="9"><b>D5:</b> &#8212;&gt; Road YELLOW (220&#937;) [E19]</text>
+      <text x="0" y="92" fill="#86efac" font-size="9"><b>D6:</b> &#8212;&gt; Road GREEN (220&#937;) [U19]</text>
+      <text x="0" y="110" fill="#ffffff" font-size="9"><b>D7:</b> &lt;&#8212; S3 Exit Sensor [W16]</text>
+      <text x="0" y="128" fill="#f472b6" font-size="9"><b>D8:</b> &#8212;&gt; Buzzer Positive (+) [V14]</text>
+      <text x="0" y="146" fill="#fdba74" font-size="9"><b>D9:</b> &#8212;&gt; North Servo PWM [JB1]</text>
+      <text x="0" y="164" fill="#fdba74" font-size="9"><b>D10:</b> &#8212;&gt; South Servo PWM [JB2]</text>
+      <text x="0" y="182" fill="#86efac" font-size="9"><b>D11:</b> &#8212;&gt; Ped Walk Green (220&#937;)</text>
+      <text x="0" y="200" fill="#fca5a5" font-size="9"><b>D12:</b> &#8212;&gt; Crossbuck L Red (220&#937;)</text>
+      <text x="0" y="218" fill="#fca5a5" font-size="9"><b>D13:</b> &#8212;&gt; Crossbuck R Red (220&#937;)</text>
+      <text x="0" y="238" fill="#cbd5e1" font-size="9"><b>GND:</b> Common Ground Rail</text>
+    </g>
+
+    <!-- Analog Header Right -->
+    <g transform="translate(320, 68)">
+      <text x="0" y="0" fill="#fde047" font-size="10" font-weight="bold">ANALOG &amp; POWER</text>
+      <text x="0" y="20" fill="#fca5a5" font-size="9"><b>A0:</b> &lt;&#8212; Emergency Stop [10k&#937;]</text>
+      <text x="0" y="42" fill="#fca5a5" font-size="9"><b>A1:</b> &lt;&#8212; S4 Obstacle Sensor</text>
+      <text x="0" y="64" fill="#86efac" font-size="9"><b>A2:</b> &#8212;&gt; Train Aspect GREEN</text>
+      <text x="0" y="86" fill="#fca5a5" font-size="9"><b>A3:</b> &#8212;&gt; Train Aspect RED</text>
+      <text x="0" y="108" fill="#fb7185" font-size="9"><b>A4:</b> &lt;&#8212; Tamper Button [10k&#937;]</text>
+      <text x="0" y="130" fill="#fca5a5" font-size="9"><b>A5:</b> &#8212;&gt; Ped Don&#39;t Walk (220&#937;)</text>
+      <text x="0" y="160" fill="#f87171" font-size="9"><b>+5V:</b> Logic Supply Rail</text>
+      <text x="0" y="180" fill="#cbd5e1" font-size="9"><b>GND:</b> Star Ground Return</text>
+    </g>
+
+    <!-- Controller Status Line -->
+    <rect x="18" y="380" width="434" height="40" rx="4" fill="#0f172a" stroke="#334155"/>
+    <text x="235" y="398" fill="#38bdf8" font-size="9.5" font-weight="bold" text-anchor="middle">FAIL-SAFE INTERLOCK ENFORCEMENT</text>
+    <text x="235" y="412" fill="#cbd5e1" font-size="8.5" text-anchor="middle">Structural combinational gates inhibit gate lift command if track_occupied == 1</text>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 3. RIGHT COLUMN: SIGNALS, BUZZER & SWITCHES                               -->
+  <!-- ========================================================================= -->
+  <g transform="translate(910, 64)">
+    <rect width="570" height="440" rx="8" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+    <rect width="570" height="26" rx="8" fill="#065f46"/>
+    <text x="15" y="18" fill="#ffffff" font-size="11" font-weight="bold">[SIGNALS] SIGNALS, CROSSBUCKS, AUDIBLE ALARM &amp; EMERGENCY SWITCHES</text>
+
+    <g transform="translate(15, 34)">
+      <!-- A. Road Lights -->
+      <rect width="540" height="68" rx="4" fill="#1e293b" stroke="#10b981"/>
+      <text x="10" y="16" fill="#34d399" font-size="10" font-weight="bold">A. ROAD TRAFFIC LIGHT MASTS (North &amp; South Approaches via 220&#937; Resistors):</text>
+      <circle cx="20" cy="34" r="6" fill="#ef4444"/><text x="32" y="38" fill="#ffffff" font-size="9"><b>RED (Stop):</b> Pin D4 ➔ R1 (220&#937;) ➔ Anode (+)</text>
+      <circle cx="20" cy="52" r="6" fill="#f59e0b"/><text x="32" y="56" fill="#ffffff" font-size="9"><b>YELLOW (Warn):</b> Pin D5 ➔ R2 (220&#937;) ➔ Anode (+)</text>
+      <circle cx="290" cy="34" r="6" fill="#10b981"/><text x="302" y="38" fill="#ffffff" font-size="9"><b>GREEN (Go):</b> Pin D6 ➔ R3 (220&#937;) ➔ Anode (+)</text>
+      <text x="290" y="56" fill="#94a3b8" font-size="8.5">All LED Cathodes (-) tied to Common GND</text>
+
+      <!-- B. Pedestrian Signals -->
+      <g transform="translate(0, 75)">
+        <rect width="540" height="52" rx="4" fill="#1e293b" stroke="#38bdf8"/>
+        <text x="10" y="16" fill="#38bdf8" font-size="10" font-weight="bold">B. PEDESTRIAN CROSSING INDICATORS (via 220&#937; Resistors):</text>
+        <circle cx="20" cy="34" r="6" fill="#10b981"/><text x="32" y="38" fill="#ffffff" font-size="9"><b>WALK GREEN:</b> Pin D11 ➔ R8 (220&#937;) ➔ Anode (+)</text>
+        <circle cx="290" cy="34" r="6" fill="#ef4444"/><text x="302" y="38" fill="#ffffff" font-size="9"><b>DON&#39;T WALK RED:</b> Pin A5 ➔ R9 (220&#937;) ➔ Anode (+)</text>
+      </g>
+
+      <!-- C. Crossbuck Wig-Wags -->
+      <g transform="translate(0, 134)">
+        <rect width="540" height="60" rx="4" fill="#1e293b" stroke="#ef4444"/>
+        <text x="10" y="16" fill="#f87171" font-size="10" font-weight="bold">C. CROSSBUCK RED WIG-WAG WARNING FLASHERS (1.25 Hz Alternating Cadence):</text>
+        <text x="10" y="34" fill="#ffffff" font-size="9">&#8226; Left Red Flasher Pair (x2 LEDs): Pin D12 ➔ <b>R4 (220&#937;)</b> ➔ Anodes (+)</text>
+        <text x="10" y="50" fill="#ffffff" font-size="9">&#8226; Right Red Flasher Pair (x2 LEDs): Pin D13 ➔ <b>R5 (220&#937;)</b> ➔ Anodes (+)</text>
+      </g>
+
+      <!-- D. Train Signals & Buzzer -->
+      <g transform="translate(0, 201)">
+        <rect width="540" height="64" rx="4" fill="#1e293b" stroke="#38bdf8"/>
+        <text x="10" y="16" fill="#38bdf8" font-size="10" font-weight="bold">D. RAILWAY TRACK SIGNALS &amp; AUDIBLE ALARM BUZZER:</text>
+        <circle cx="20" cy="34" r="6" fill="#10b981"/><text x="32" y="38" fill="#ffffff" font-size="9"><b>TRACK GREEN:</b> Pin A2 ➔ R6 (220&#937;) (Safe ONLY Gate=0&#176;)</text>
+        <circle cx="20" cy="50" r="6" fill="#ef4444"/><text x="32" y="54" fill="#ffffff" font-size="9"><b>TRACK RED:</b> Pin A3 ➔ R7 (220&#937;) (Gate open / hazard)</text>
+        <text x="290" y="38" fill="#f472b6" font-size="9"><b>PIEZO BUZZER (+):</b> Controller Pin D8</text>
+        <text x="290" y="54" fill="#94a3b8" font-size="8.5">Chime: 1.8kHz pulse | Siren: 2.8kHz warble</text>
+      </g>
+
+      <!-- E. Emergency Buttons -->
+      <g transform="translate(0, 272)">
+        <rect width="540" height="72" rx="4" fill="#1e293b" stroke="#f43f5e"/>
+        <text x="10" y="16" fill="#fb7185" font-size="10" font-weight="bold">E. MANUAL EMERGENCY &amp; TAMPER BUTTONS (Tactile SPST NO with 10k&#937; Pull-Down):</text>
+        <text x="10" y="36" fill="#ffffff" font-size="9">1. <b>Manual Emergency Stop:</b> Term 1 ➔ +5V | Term 2 ➔ <b>Pin A0</b> + <b>10k&#937; R_pd to GND</b></text>
+        <text x="10" y="56" fill="#ffffff" font-size="9">2. <b>Tamper Interlock Test:</b> Term 1 ➔ +5V | Term 2 ➔ <b>Pin A4</b> + <b>10k&#937; R_pd to GND</b></text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ========================================================================= -->
+  <!-- 4. BOTTOM BANNER: POWER DISTRIBUTION & BILL OF MATERIALS SUMMARY          -->
+  <!-- ========================================================================= -->
+  <g transform="translate(20, 515)">
+    <rect width="1460" height="92" rx="6" fill="#0f172a" stroke="#eab308" stroke-width="1.5"/>
+    <rect width="1460" height="24" rx="6" fill="#854d0e"/>
+    <text x="15" y="17" fill="#ffffff" font-size="11" font-weight="bold">[POWER] POWER DISTRIBUTION NETWORK &amp; COMPONENT SUMMARY TABLE</text>
+
+    <g transform="translate(15, 32)">
+      <text x="0" y="16" fill="#fef08a" font-size="10" font-weight="bold">&#8226; DUAL REGULATED RAILS:</text>
+      <text x="170" y="16" fill="#cbd5e1" font-size="9.5">Logic Rail = +5.0V DC (200mA) via USB/7805 &#8226; Motor Rail = +5.0V DC (2.0A) via External DC Adapter</text>
+
+      <text x="0" y="34" fill="#4ade80" font-size="10" font-weight="bold">&#8226; DECOUPLING CAPACITORS:</text>
+      <text x="170" y="34" fill="#cbd5e1" font-size="9.5">C1 = <b>470 &#956;F / 16V</b> Electrolytic (Bulk Charge Reservoir) &#8741; C2 = <b>0.1 &#956;F / 50V</b> Ceramic Disc 104 (High-Frequency Bypass)</text>
+
+      <text x="0" y="52" fill="#38bdf8" font-size="10" font-weight="bold">&#8226; COMPONENT RESISTORS:</text>
+      <text x="170" y="52" fill="#cbd5e1" font-size="9.5">All LEDs: <b>220 &#937; &#177;5%, 1/4W</b> (Red-Red-Brown) &#8226; Button Pull-Downs: <b>10 k&#937; &#177;5%, 1/4W</b> (Brown-Black-Orange)</text>
+    </g>
+  </g>
+</svg>

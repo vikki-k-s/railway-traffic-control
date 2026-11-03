@@ -76,44 +76,44 @@
   }
 
   h2.section-title {
-    font-size: 11.5pt;
+    font-size: 11pt;
     font-weight: 700;
     color: #1e3a8a;
     border-bottom: 1.5px solid #cbd5e1;
-    padding-bottom: 3px;
-    margin-top: 14px;
-    margin-bottom: 7px;
+    padding-bottom: 2px;
+    margin-top: 10px;
+    margin-bottom: 5px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   h3.sub-title {
-    font-size: 10pt;
+    font-size: 9.5pt;
     font-weight: 700;
     color: #334155;
-    margin-top: 9px;
-    margin-bottom: 4px;
+    margin-top: 6px;
+    margin-bottom: 3px;
   }
 
   p {
-    margin: 0 0 7px 0;
+    margin: 0 0 5px 0;
     text-align: justify;
   }
 
   ul, ol {
-    margin: 0 0 7px 0;
+    margin: 0 0 5px 0;
     padding-left: 18px;
   }
 
   li {
-    margin-bottom: 2px;
+    margin-bottom: 1.5px;
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 7px 0 10px 0;
-    font-size: 8pt;
+    margin: 4px 0 6px 0;
+    font-size: 7.8pt;
     font-family: 'Liberation Sans', Arial, sans-serif;
     page-break-inside: avoid;
   }
@@ -124,7 +124,7 @@
 
   th, td {
     border: 1px solid #cbd5e1;
-    padding: 4.5px 7px;
+    padding: 3px 5.5px;
     text-align: left;
     vertical-align: middle;
   }
@@ -141,9 +141,9 @@
 
   .badge {
     display: inline-block;
-    padding: 2px 6px;
+    padding: 1.5px 5px;
     border-radius: 3px;
-    font-size: 7.5pt;
+    font-size: 7pt;
     font-weight: 700;
     font-family: 'Liberation Sans', Arial, sans-serif;
     text-transform: uppercase;
@@ -155,8 +155,8 @@
   .callout {
     background-color: #f8fafc;
     border-left: 4px solid #1e3a8a;
-    padding: 7px 11px;
-    margin: 8px 0;
+    padding: 5px 9px;
+    margin: 6px 0;
     border-radius: 0 5px 5px 0;
     font-size: 8.5pt;
     page-break-inside: avoid;
@@ -169,11 +169,11 @@
   pre {
     background-color: #0f172a;
     color: #f8fafc;
-    padding: 7px 9px;
-    border-radius: 5px;
-    font-size: 7pt;
-    line-height: 1.35;
-    margin: 7px 0 9px 0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 6.8pt;
+    line-height: 1.22;
+    margin: 4px 0 6px 0;
     white-space: pre-wrap;
     word-break: break-all;
     page-break-inside: avoid;
@@ -379,31 +379,27 @@
   </p>
 
   <pre>
-                                railway_level_crossing_top
-                                            |
-        +-----------------------------------+-----------------------------------+
-        |                                   |                                   |
-+-------v-------+                   +-------v-------+                   +-------v-------+
-|train_detection|                   |gate_controller|                   |emergency_warn |
-| - Debouncing  |                   | - 4-State FSM |                   | - Dual Buzzer |
-| - Approach/Clr|                   | - Motor Drive |                   | - Wig-Wag LEDs|
-| - Diagnostics |                   | - Warning Lead|                   | - Priority Enc|
-+-------+-------+                   +-------+-------+                   +-------+-------+
-        |                                   |                                   |
-        +-----------------+-----------------+-----------------------------------+
-                          |
-               +----------v------------+
-               | gate_safety_interlock | <--- Hardware Failsafe (Unit 2 Gate Primitives)
-               | - AND / OR / NOT Prims|
-               | - Electromagnetic Lock|
-               +----------+------------+
-                          |
-               +----------v------------+
-               |traffic_light_control  |
-               | - Road: Red/Yellow/Grn|
-               | - Ped: Walk / Don't   |
-               | - Train Aspect: R / G |
-               +-----------------------+
+                  +-----------------------------------------+
+                  |       railway_level_crossing_top        |
+                  +----+------------------+-----------------+
+                       |                  |                 |
+     +-----------------+                  |                 +-----------------+
+     v                                    v                                   v
++-----------------+              +-----------------+                 +-----------------+
+| train_detection |              | gate_controller |                 | emergency_warn  |
+| • Debouncing    |              | • 4-State FSM   |                 | • Dual Buzzer   |
+| • Approach/Exit |              | • Motor PWM     |                 | • Wig-Wag LEDs  |
++--------+--------+              +--------+--------+                 +--------+--------+
+         |                                |                                   |
+         +----------------+---------------+-----------------------------------+
+                          v
+               +---------------------+
+               |gate_safety_interlock| &lt;--- Unit 2 Hardware Primitive Interlock
+               +----------+----------+
+                          v
+               +---------------------+
+               |traffic_light_control| &lt;--- Unit 3 Continuous Dataflow Logic
+               +---------------------+
   </pre>
 
   <h3 class="sub-title">4.1 Finite State Machine (FSM) State Transition Flow</h3>
@@ -430,34 +426,33 @@
   </p>
   <pre>
   // Pure Gate-Level Modelling (Unit 2 Built-in Primitives)
-  not u_inv_tp   (not_train_present, train_present);
-  not u_inv_ta   (not_train_approaching, train_approaching);
-  not u_inv_emg  (not_emergency, emergency_active);
-
-  or  u_or_danger(danger_condition, train_present, train_approaching, emergency_active);
-  and u_and_safe (normal_safe_permit, not_train_present, not_train_approaching, not_emergency);
-  and u_and_open (interlock_open_en, req_open, normal_safe_permit);
-  or  u_or_close (interlock_close_en, req_close, danger_condition);
-  buf u_buf_lock (barrier_lock_cmd, danger_condition);
-  and u_and_alarm(safety_violation_alarm, manual_force_open, danger_condition);
+  or  u_or_danger (danger_cond, train_present, train_approaching, emergency_active);
+  and u_and_safe  (safe_permit, not_train_present, not_train_approaching, not_emergency);
+  and u_and_open  (interlock_open_en, req_open, safe_permit);
+  or  u_or_close  (interlock_close_en, req_close, danger_cond);
+  and u_and_alarm (safety_violation_alarm, manual_force_open, danger_cond);
   </pre>
 
-  <h3 class="sub-title">5.3 Unit 3: Dataflow and Behavioural Modelling</h3>
+  <!-- ===================================================================== -->
+  <!-- PAGE 4: DATAFLOW, ADVANCED VERILOG & SIMULATION VERIFICATION          -->
+  <!-- ===================================================================== -->
+  <div class="page-break"></div>
+  <h3 class="sub-title" style="margin-top: 0;">5.3 Unit 3: Dataflow and Behavioural Modelling</h3>
   <p>
     <b>Dataflow:</b> Used in <code>traffic_light_controller.v</code> via continuous assignments (<code>assign</code>):
   </p>
   <pre>
-  assign road_green         = (gate_is_open) & (~gate_warning) & (~train_approaching) & (~train_present) & (~emergency_active);
-  assign road_yellow        = (gate_warning || (gate_state == 2'b01)) & (~emergency_active);
-  assign road_red           = (gate_state == 2'b10) || (gate_state == 2'b11) || emergency_active || (gate_warning && blink_pulse);
-  assign train_signal_green = (gate_is_closed) & (~obstacle_detected) & (~emergency_active);
+  assign road_green         = (gate_is_open) &amp; (~gate_warning) &amp; (~train_approaching) &amp; (~train_present) &amp; (~emergency_active);
+  assign road_yellow        = (gate_warning || (gate_state == 2'b01)) &amp; (~emergency_active);
+  assign road_red           = (gate_state == 2'b10) || (gate_state == 2'b11) || emergency_active || (gate_warning &amp;&amp; blink_pulse);
+  assign train_signal_green = (gate_is_closed) &amp; (~obstacle_detected) &amp; (~emergency_active);
   assign train_signal_red   = ~train_signal_green;
   </pre>
   <p>
     <b>Behavioural:</b> Procedural edge-triggered blocks (<code>always @(posedge clk or negedge rst_n)</code>) model the sequential debouncing shift-registers and FSM state registers.
   </p>
 
-  <h3 class="sub-title">5.4 Unit 4: Tasks, Functions & Multitasking Concepts</h3>
+  <h3 class="sub-title">5.4 Unit 4: Tasks, Functions &amp; Multitasking Concepts</h3>
   <ul>
     <li><b>Function:</b> <code>check_sensor_validity</code> in <code>train_detection.v</code> validates sequence consistency, detecting sensor sequence anomalies in zero simulation time.</li>
     <li><b>Task:</b> <code>update_barrier_position</code> in <code>gate_controller.v</code> models motor angular displacement; testbench tasks (<code>simulate_normal_train_passage</code>) encapsulate stimulus routines.</li>
@@ -586,12 +581,16 @@
     </tbody>
   </table>
 
-  <h2 class="section-title">7. Physical Hardware Prototype Construction & Circuit Schematic</h2>
+  <!-- ===================================================================== -->
+  <!-- PAGE 5: PHYSICAL HARDWARE PROTOTYPE, SCHEMATIC & CONCLUSION           -->
+  <!-- ===================================================================== -->
+  <div class="page-break"></div>
+  <h2 class="section-title" style="margin-top: 0;">7. Physical Hardware Prototype Construction &amp; Circuit Schematic</h2>
   <p>
     To satisfy the working model demonstration requirement, a tabletop miniature physical diorama was constructed with the complete electrical circuit schematic depicted below:
   </p>
-  <div style="text-align: center; margin: 8px 0; page-break-inside: avoid;">
-    <img src="circuit_diagram.svg" style="width: 100%; max-height: 280px; border-radius: 6px; border: 1px solid #cbd5e1;" alt="Complete Circuit Schematic">
+  <div style="text-align: center; margin: 6px 0; page-break-inside: avoid;">
+    <img src="report_circuit_diagram.svg" style="width: 100%; max-height: 220px; border-radius: 6px; border: 1px solid #cbd5e1;" alt="Complete Circuit Schematic">
   </div>
   <ul>
     <li><b>TowerPro SG90 Micro Servos (2x):</b> Actuate barrier arms across the two-lane roadway (90° ↔ 0°). Powered by dedicated external 5V 2A DC supply with shared common ground.</li>
